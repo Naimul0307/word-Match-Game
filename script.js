@@ -1,4 +1,4 @@
-const gridSize = 10; // 10x10 grid
+const gridSize = 17; // 17x17 grid
 const wordGrid = document.getElementById("word-grid");
 let words = []; // To hold words from XML
 let score = 0; // Initialize score
@@ -17,10 +17,22 @@ function loadWords() {
         words.push(wordNodes[i].textContent);
       }
 
+      // Randomly select 5 words if there are more than 5
+      if (words.length > 5) {
+        words = getRandomWords(words, 5);  // Get 5 random words
+      }
+
       initGame(); // Initialize the game after loading words
     })
     .catch(err => console.error("Error loading XML:", err));
 }
+
+// Function to randomly select 'n' words from the words array
+function getRandomWords(wordsArray, num) {
+  const shuffled = wordsArray.sort(() => 0.5 - Math.random());  // Shuffle the array
+  return shuffled.slice(0, num);  // Return the first 'num' words from the shuffled array
+}
+
 
 // Create grid
 function createGrid() {
@@ -35,10 +47,12 @@ function createGrid() {
   }
 }
 
+
 // Place words in the grid
 function placeWords() {
   words.forEach((word) => {
-    const direction = ["horizontal", "vertical", "diagonal", "reverse-horizontal", "reverse-vertical"][Math.floor(Math.random() * 5)];
+    // const direction = ["horizontal", "vertical", "diagonal", "reverse-horizontal", "reverse-vertical"][Math.floor(Math.random() * 5)];
+    const direction = ["horizontal", "vertical", "reverse-horizontal", "reverse-vertical"][Math.floor(Math.random() * 4)];
     let placed = false;
     while (!placed) {
       const startRow = Math.floor(Math.random() * gridSize);
@@ -59,7 +73,7 @@ function placeWords() {
 function canPlaceWord(word, row, col, direction) {
   if (direction === "horizontal" && col + word.length > gridSize) return false;
   if (direction === "vertical" && row + word.length > gridSize) return false;
-  if (direction === "diagonal" && (row + word.length > gridSize || col + word.length > gridSize)) return false;
+  // if (direction === "diagonal" && (row + word.length > gridSize || col + word.length > gridSize)) return false;
   if (direction === "reverse-horizontal" && col - word.length < -1) return false;
   if (direction === "reverse-vertical" && row - word.length < -1) return false;
 
@@ -77,8 +91,8 @@ function getCellForWordPlacement(row, col, direction, index) {
       return document.querySelector(`[data-row="${row}"][data-col="${col + index}"]`);
     case "vertical":
       return document.querySelector(`[data-row="${row + index}"][data-col="${col}"]`);
-    case "diagonal":
-      return document.querySelector(`[data-row="${row + index}"][data-col="${col + index}"]`);
+    // case "diagonal":
+    //   return document.querySelector(`[data-row="${row + index}"][data-col="${col + index}"]`);
     case "reverse-horizontal":
       return document.querySelector(`[data-row="${row}"][data-col="${col - index}"]`);
     case "reverse-vertical":
@@ -146,14 +160,14 @@ function handleMove(event) {
         selectionDirection = "vertical";
       } else if (rowDiff === 0 && colDiff === 1) {
         selectionDirection = "horizontal";
-      } else if (rowDiff === 1 && colDiff === 1) {
-        selectionDirection = "diagonal-right"; // Bottom-right diagonal
-      } else if (rowDiff === -1 && colDiff === -1) {
-        selectionDirection = "diagonal-left"; // Top-left diagonal
-      } else if (rowDiff === 1 && colDiff === -1) {
-        selectionDirection = "diagonal-right"; // Bottom-left diagonal
-      } else if (rowDiff === -1 && colDiff === 1) {
-        selectionDirection = "diagonal-left"; // Top-right diagonal
+      // } else if (rowDiff === 1 && colDiff === 1) {
+      //   selectionDirection = "diagonal-right"; // Bottom-right diagonal
+      // } else if (rowDiff === -1 && colDiff === -1) {
+      //   selectionDirection = "diagonal-left"; // Top-left diagonal
+      // } else if (rowDiff === 1 && colDiff === -1) {
+      //   selectionDirection = "diagonal-right"; // Bottom-left diagonal
+      // } else if (rowDiff === -1 && colDiff === 1) {
+      //   selectionDirection = "diagonal-left"; // Top-right diagonal
       } else if (rowDiff === -1 && colDiff === 0) {
         selectionDirection = "reverse-vertical";
       } else if (rowDiff === 0 && colDiff === -1) {

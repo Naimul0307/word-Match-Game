@@ -1,54 +1,155 @@
-body {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
   font-family: Arial, sans-serif;
+  font-size: 18px; /* Adjust base font size */
+  font-weight: 400;
   background-color: #f4f4f4;
   margin: 0;
   padding: 0;
   text-align: center;
+  height: 100%;  /* Ensure full height for the body */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+.score-position {
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 25px;
+  right: 95px;
+  font-size: 48px;
+  font-weight: bold;
+  color: #333;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 5px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-family: 'Arial', sans-serif;
+  z-index: 10;
 }
 
 #game-container {
-  margin: 20px auto;
-  max-width: 1000px; /* Increased max-width */
+  width: 90%; /* Make the container take up 80% of the page width */
+  margin: 100px auto; /* Center the container */
   background: #fff;
   padding: 30px; /* Increased padding */
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  height: 80vh; /* Ensure the game container takes up 80% of the viewport height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* Center content vertically */
 }
 
+/* Set the grid to fill the container */
 #word-grid {
   display: grid;
-  grid-template-columns: repeat(10, 60px); /* Increased column width */
-  grid-gap: 8px; /* Increased gap */
-  justify-content: center;
+  grid-template-columns: repeat(17, 1fr); /* Use 1fr to divide the space evenly among 17 columns */
+  grid-template-rows: repeat(17, 1fr); /* Ensure rows are equally distributed */
+  width: 100%; /* Ensure the grid takes up the full width of the container */
+  height: 100%; /* Ensure the grid takes up the full height of the container */
 }
 
+/* Style the grid cells */
 .grid-cell {
-  width: 60px; /* Increased width */
-  height: 60px; /* Increased height */
-  display: inline-block;
-  border: 2px solid #ccc; /* Thicker border */
-  text-align: center;
-  line-height: 60px; /* Adjusted line height for larger cells */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ccc;
+  background-color: #fff;
+  font-size: 20px;  /* Adjust font size to fit the cells */
+  font-weight: bold;
   cursor: pointer;
-  font-size: 18px; /* Increased font size */
+  transition: background-color 0.2s ease; /* Smooth transition for background changes */
 }
 
-.selected {
+.grid-cell.selected {
   background-color: yellow;
 }
 
-.matched {
+.grid-cell.matched {
   background-color: green;
   color: white;
 }
 
+/* Optional: Style for words to find section */
 #words-to-find {
   margin-top: 30px; /* Increased margin-top */
   font-size: 18px; /* Increased font size */
 }
 
+/* Style the list of words */
 #word-list {
   list-style-type: none;
   padding: 0;
   font-size: 18px; /* Increased font size */
+}
+
+/* Responsive Design */
+@media screen and (min-width: 1080px) and (max-height: 1920px) and (orientation: portrait) {
+  #game-container {
+    width: 90%; /* Reduce width to 70% for portrait orientation */
+    height: 60vh; /* Increase height slightly to use available vertical space */
+    margin: 500px auto;
+  }
+
+  #word-grid {
+    grid-template-columns: repeat(17, 1fr); /* Reduce the number of columns to fit better */
+    grid-template-rows: repeat(17, 1fr); /* Reduce the number of rows */
+  }
+
+  .grid-cell {
+    font-size: 30px;
+    height: 65px;
+    width: 54px;
+    font-weight: bold;
+    border: 2px solid #ccc;
+  }
+
+/* Position the score in the top-right corner */
+.score-position {
+  top: 200px;
+  right: 100px;
+  font-family: 'Arial', sans-serif;
+  z-index: 10;
+}
+
+  #words-to-find {
+    font-size: 16px; /* Smaller font for words-to-find list */
+  }
+}
+
+/* Media query for smaller screens, like tablets or mobile */
+@media screen and (max-width: 768px) {
+  #game-container {
+    width: 90%; /* Make the container take up 90% of the page width */
+    margin: 50px auto; /* Reduce margin for smaller screens */
+    padding: 20px; /* Reduce padding */
+  }
+
+  #word-grid {
+    grid-template-columns: repeat(10, 1fr); /* Reduce number of columns */
+    grid-template-rows: repeat(10, 1fr); /* Reduce number of rows */
+  }
+
+  .grid-cell {
+    font-size: 14px; /* Reduce font size for smaller screens */
+    height: 40px; /* Adjust height of cells */
+    width: 40px; /* Adjust width of cells */
+  }
+
+  .score-position {
+    font-size: 14px;  /* Adjust font size for smaller screens */
+    right: 10px; /* Adjust position for smaller space */
+    top: 10px;
+  }
+
+  #words-to-find {
+    font-size: 14px; /* Smaller font for words-to-find list */
+  }
 }

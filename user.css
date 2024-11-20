@@ -1,0 +1,208 @@
+
+/* Load the GaMaamli-Regular font */
+/* @font-face {
+    font-family: 'GaMaamli-Regular';
+    src: url('../fonts/GaMaamli-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+} */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Custom CSS */
+body,html {
+    height: 100%;
+    width: 100%;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 18px; /* Adjust base font size */
+    font-weight: 400;
+    background-image: url('../background/game_bg.jpeg'); /* Background image URL */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+    margin: 0;
+    padding: 0;
+    color: #ffffff; /* Default text color for body */
+}
+
+h1{
+    flex: 1;
+    font-size: 2em; /* Increased font size */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none;  /* For Chrome, Safari, and Opera */
+}
+
+.container-fluid {
+    padding: 0 15px;
+    max-width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure full viewport height */
+}
+
+.section {
+    width: 100%;
+    max-width: 900px;
+    text-align: center;
+    padding: 40px; /* Increase padding */
+    /* background: linear-gradient(to right, rgba(75, 173, 99, 0.4), rgba(34, 37, 34, 0.4), rgba(42, 45, 218, 0.5)); Gradient background with reduced opacity */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 20px rgba(207, 124, 124, 0.3); /* Shadow for depth */
+    font-size: 30px; /* Increase font size within the section */
+    color: #111010; /* Text color for content inside section */
+}
+
+.btn {
+    margin: 10px;
+    padding: 15px 30px; /* Increase button padding */
+    font-size: 1.1em; /* Increase button font size */
+    font-weight: bolder;
+    background-color: rgba(219,227,214,255);
+    color: black;
+    box-shadow: 0 20px 12px rgba(20, 20, 20, 0.404); /* Increased bottom shadow */
+    text-transform: uppercase;
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Add transition for smooth animation */
+}
+
+.btn:hover{
+    background: linear-gradient(30deg,rgba(175,195,167,255), rgba(234,239,232,255), rgba(192,207,184,255));
+    color: black;
+}
+.btn:active {
+    transform: translateY(8px); /* Push the button down slightly on click */
+    box-shadow: 0 6px 12px rgba(20, 20, 20, 0.6); /* Adjusted shadow for active state */
+}
+
+#settings-options,
+#user-form {
+    margin-top: 20px;
+    text-align: left;
+    flex: 1;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Adjust input text size */
+input[type=text], 
+input[type=email], 
+input[type=tel], 
+input[type=number] {
+    font-size: 1.2em; /* Adjust input text size */
+    padding: 10px; /* Adjust input padding */
+    margin: 20px;
+    border-radius: 20px; /* Rounded corners for inputs */
+    box-shadow: 0 20px 12px rgba(20, 20, 20, 0.404); /* Increased bottom shadow */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Add transition for smooth animation */
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 30px; /* Adjust padding for smaller screens */
+    }
+    
+    .btn {
+        padding: 12px 24px; /* Adjust button padding for smaller screens */
+        font-size: 1em; /* Adjust button font size for smaller screens */
+    }
+    
+    .table-responsive {
+        overflow-x: auto; /* Enable horizontal scrolling on smaller screens */
+    }
+}
+
+
+.alert {
+    display: none; /* Initially hide alert */
+    position: fixed; /* Fixed positioning to cover the entire viewport */
+    top: 0;
+    left: 0;
+    width: 100%; /* Cover full width */
+    height: 100%; /* Cover full height */
+    background-image: url('../background/game_bg.jpg'); /* Background image URL */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px; /* Adjust font size */
+    color: #4CAF50;
+}
+
+.alert.show {
+    display: flex;
+    animation: fadeIn 0.5s ease;
+}
+
+.alert.success {
+    color: #4CAF50; /* Green text color for success alert */
+}
+
+.alert.error {
+    color: #FF5733; /* Red text color for error alert */
+}
+
+.alert.warning {
+    color: #FFC300; /* Yellow text color for warning alert */
+}
+
+.alert.info {
+    color: #3498DB; /* Blue text color for info alert */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Custom CSS for styling and positioning */
+
+.keyboard-container {
+    background-color: #f8f9fa;
+    max-width: 400px; /* Adjust maximum width as needed */
+    z-index: 1000; /* Ensure it's above other elements */
+    touch-action: none; /* Disable default touch actions */
+}
+
+.resize-handle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    cursor: nwse-resize; /* Cursor for resize handle */
+    background-color: #007bff;
+}
+
+/* Specific Media Query for 1080x1920 Resolution (Portrait) */
+@media screen and (min-width: 1080px) and (max-height: 1920px) and (orientation: portrait) {
+
+body {
+    /* font-family: 'GaMaamli-Regular', Arial, sans-serif; */
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 18px; /* Adjust base font size */
+    font-weight: 400;
+    background-image: url('../background/game_bg_p.jpeg'); /* Background image URL */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+    margin: 0;
+    padding: 0;
+    color: #ffffff; /* Default text color for body */
+}
+}
