@@ -8,43 +8,47 @@ body {
 
 #game-container {
   margin: 20px auto;
-  max-width: 800px;
+  max-width: 1000px; /* Increased max-width */
   background: #fff;
-  padding: 20px;
+  padding: 30px; /* Increased padding */
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 #word-grid {
   display: grid;
-  grid-template-columns: repeat(10, 40px);
-  grid-gap: 5px;
+  grid-template-columns: repeat(10, 60px); /* Increased column width */
+  grid-gap: 8px; /* Increased gap */
   justify-content: center;
 }
 
 .grid-cell {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #ccc;
-  font-size: 18px;
-  font-weight: bold;
+  width: 60px; /* Increased width */
+  height: 60px; /* Increased height */
+  display: inline-block;
+  border: 2px solid #ccc; /* Thicker border */
+  text-align: center;
+  line-height: 60px; /* Adjusted line height for larger cells */
   cursor: pointer;
-  background-color: #f9f9f9;
+  font-size: 18px; /* Increased font size */
 }
 
-.grid-cell.selected {
-  background-color: #ffd700;
+.selected {
+  background-color: yellow;
+}
+
+.matched {
+  background-color: green;
+  color: white;
 }
 
 #words-to-find {
-  margin-top: 20px;
+  margin-top: 30px; /* Increased margin-top */
+  font-size: 18px; /* Increased font size */
 }
 
 #word-list {
   list-style-type: none;
   padding: 0;
+  font-size: 18px; /* Increased font size */
 }
-

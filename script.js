@@ -38,7 +38,7 @@ function createGrid() {
 // Place words in the grid
 function placeWords() {
   words.forEach((word) => {
-    const direction = ["horizontal", "vertical", "diagonal", "reverse"][Math.floor(Math.random() * 4)];
+    const direction = ["horizontal", "vertical", "diagonal", "reverse-horizontal", "reverse-vertical"][Math.floor(Math.random() * 5)];
     let placed = false;
     while (!placed) {
       const startRow = Math.floor(Math.random() * gridSize);
@@ -60,6 +60,8 @@ function canPlaceWord(word, row, col, direction) {
   if (direction === "horizontal" && col + word.length > gridSize) return false;
   if (direction === "vertical" && row + word.length > gridSize) return false;
   if (direction === "diagonal" && (row + word.length > gridSize || col + word.length > gridSize)) return false;
+  if (direction === "reverse-horizontal" && col - word.length < -1) return false;
+  if (direction === "reverse-vertical" && row - word.length < -1) return false;
 
   for (let i = 0; i < word.length; i++) {
     const cell = getCellForWordPlacement(row, col, direction, i);
@@ -77,8 +79,10 @@ function getCellForWordPlacement(row, col, direction, index) {
       return document.querySelector(`[data-row="${row + index}"][data-col="${col}"]`);
     case "diagonal":
       return document.querySelector(`[data-row="${row + index}"][data-col="${col + index}"]`);
-    case "reverse":
+    case "reverse-horizontal":
       return document.querySelector(`[data-row="${row}"][data-col="${col - index}"]`);
+    case "reverse-vertical":
+      return document.querySelector(`[data-row="${row - index}"][data-col="${col}"]`);
     default:
       return null;
   }
@@ -96,23 +100,76 @@ function fillRandomLetters() {
   });
 }
 
-// Handle word selection
+// Handle mouse and touch events for drag-to-select
 let selectedCells = [];
-function handleCellClick(event) {
+let isSelecting = false; // Flag to check if the user is currently selecting
+let selectionDirection = null; // Track the direction of the selection
+
+// Handle touch and mouse start
+function handleStart(event) {
+  // Prevent default to stop touch scrolling behavior
+  event.preventDefault();
+
   const cell = event.target;
-  if (!cell.classList.contains("grid-cell")) return;
-
-  // Toggle selection
-  if (selectedCells.includes(cell)) {
-    cell.classList.remove("selected");
-    selectedCells = selectedCells.filter((c) => c !== cell);
-  } else {
+  if (cell.classList.contains("grid-cell")) {
+    selectedCells = [cell];
     cell.classList.add("selected");
-    selectedCells.push(cell);
+    isSelecting = true;
+    selectionDirection = null; // Reset the direction
   }
+}
 
-  // Check if a word is matched
-  checkWordMatch();
+// Handle touch and mouse movement
+function handleMove(event) {
+  // Prevent default to stop touch scrolling behavior
+  event.preventDefault();
+
+  if (isSelecting) {
+    const cell = event.target;
+    if (cell.classList.contains("grid-cell") && !selectedCells.includes(cell)) {
+      const lastSelectedCell = selectedCells[selectedCells.length - 1];
+
+      // Calculate difference in rows and columns
+      const rowDiff = parseInt(cell.dataset.row) - parseInt(lastSelectedCell.dataset.row);
+      const colDiff = parseInt(cell.dataset.col) - parseInt(lastSelectedCell.dataset.col);
+
+      // Set the selection direction based on movement
+      if (rowDiff === 1 && colDiff === 0) {
+        selectionDirection = "vertical";
+      } else if (rowDiff === 0 && colDiff === 1) {
+        selectionDirection = "horizontal";
+      } else if (rowDiff === 1 && colDiff === 1) {
+        selectionDirection = "diagonal-right"; // Bottom-right diagonal
+      } else if (rowDiff === -1 && colDiff === -1) {
+        selectionDirection = "diagonal-left"; // Top-left diagonal
+      } else if (rowDiff === 1 && colDiff === -1) {
+        selectionDirection = "diagonal-right"; // Bottom-left diagonal
+      } else if (rowDiff === -1 && colDiff === 1) {
+        selectionDirection = "diagonal-left"; // Top-right diagonal
+      } else if (rowDiff === -1 && colDiff === 0) {
+        selectionDirection = "reverse-vertical";
+      } else if (rowDiff === 0 && colDiff === -1) {
+        selectionDirection = "reverse-horizontal";
+      }
+
+      // If the direction is consistent, add the cell to the selection
+      if (selectionDirection) {
+        cell.classList.add("selected");
+        selectedCells.push(cell);
+      }
+    }
+  }
+}
+
+// Handle touch and mouse end
+function handleEnd() {
+  if (isSelecting) {
+    checkWordMatch(); // Check if the dragged cells form a word
+    selectedCells.forEach((cell) => cell.classList.remove("selected"));
+    selectedCells = [];
+    isSelecting = false;
+    selectionDirection = null;
+  }
 }
 
 // Check if selected cells match a word
@@ -122,7 +179,6 @@ function checkWordMatch() {
 
   if (words.includes(selectedWord) || words.includes(reversedWord)) {
     selectedCells.forEach((cell) => cell.classList.add("matched"));
-    selectedCells = [];
     updateScore(); // Update the score when a word is matched
   }
 }
@@ -143,8 +199,10 @@ function initGame() {
   const scoreContainer = document.getElementById("score");
   scoreContainer.textContent = `Score: ${score}`;
 
-  // Add click event listener to the grid
-  wordGrid.addEventListener("click", handleCellClick);
+  // Add mouse and touch event listeners to the grid
+  wordGrid.addEventListener("mousedown", handleStart);
+  wordGrid.addEventListener("mousemove", handleMove);
+  wordGrid.addEventListener("mouseup", handleEnd);
 }
 
 // Start the game by loading words
