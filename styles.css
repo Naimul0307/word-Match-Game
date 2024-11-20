@@ -16,13 +16,60 @@ body, html {
   overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
-.score-position {
+#timer {
+  top: 10px; /* Position the timer at the top */
+  left: 94px; /* Position the timer at the left */
+  width: auto;
+  height: auto;
+  position: absolute; /* Position relative to the page */
+  font-size: 40px; /* Increase font size for visibility */
+  font-weight: bold;
+  color: #333; /* Dark text color */
+  background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent background */
+  padding: 10px 15px; /* Add padding for better appearance */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Add subtle shadow */
+  font-family: 'Arial', sans-serif;
+  z-index: 10; /* Ensure it stays on top */
+
+  border: 5px solid transparent; /* Initially transparent border */
+  border-image: linear-gradient(90deg, #4caf50, #ff9800, #f44336);
+  border-image-slice: 1; /* Ensures the gradient covers the full border */
+  animation: progress-border 10s linear infinite; /* Animation for 10 seconds */
+}
+
+/* Keyframes for progress animation */
+@keyframes progress-border {
+  0% {
+    border-image-source: linear-gradient(90deg, #4caf50, #ff9800, #f44336);
+  }
+  100% {
+    border-image-source: linear-gradient(450deg, #4caf50, #ff9800, #f44336);
+  }
+}
+
+.time-low {
+  animation: blink 0.5s infinite alternate; /* Blink effect */
+  color: red; /* Change color to red */
+}
+
+/* Keyframes for blinking animation */
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+#score {
   width: auto;
   height: auto;
   position: absolute;
   top: 25px;
-  right: 95px;
-  font-size: 48px;
+  right: 100px;
+  font-size: 40px;
   font-weight: bold;
   color: #333;
   background-color: rgba(255, 255, 255, 0.7);
@@ -31,6 +78,11 @@ body, html {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   font-family: 'Arial', sans-serif;
   z-index: 10;
+
+  border: 5px solid transparent; /* Initially transparent border */
+  border-image: linear-gradient(90deg, #4caf50, #ff9800, #f44336);
+  border-image-slice: 1; /* Ensures the gradient covers the full border */
+  animation: progress-border 10s linear infinite; /* Animation for 10 seconds */
 }
 
 #game-container {
@@ -112,11 +164,15 @@ body, html {
   }
 
 /* Position the score in the top-right corner */
-.score-position {
+#score {
   top: 200px;
-  right: 100px;
-  font-family: 'Arial', sans-serif;
-  z-index: 10;
+  right: 60px;
+}
+
+
+#timer {
+  top: 195px;
+  left: 60px;
 }
 
   #words-to-find {

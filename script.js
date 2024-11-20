@@ -2,6 +2,8 @@ const gridSize = 17; // 17x17 grid
 const wordGrid = document.getElementById("word-grid");
 let words = []; // To hold words from XML
 let score = 0; // Initialize score
+let timeLeft = 60; // Set the countdown time in seconds
+let timerInterval; // To store the timer interval
 
 // Fetch words from XML file
 function loadWords() {
@@ -211,11 +213,59 @@ function updateScore() {
   document.getElementById("score").textContent = `Score: ${score}`;
 }
 
+
+// Timer functionality with beep and animation
+function startTimer() {
+  const timerDisplay = document.getElementById("time-left");
+
+  timerInterval = setInterval(() => {
+    if (timeLeft > 0) {
+      timeLeft--;
+      timerDisplay.textContent = timeLeft;
+
+      // Add animation and beep when timeLeft is less than or equal to 10 seconds
+      if (timeLeft <= 10) {
+        timerDisplay.classList.add("time-low"); // Add animation class
+        playBeep(); // Play the beep sound
+      } else {
+        timerDisplay.classList.remove("time-low"); // Remove animation class
+      }
+    } else {
+      clearInterval(timerInterval);
+      gameOver();
+    }
+  }, 1000);
+}
+
+function playBeep() {
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  const oscillator = audioContext.createOscillator();
+  const gainNode = audioContext.createGain();
+
+  oscillator.connect(gainNode);
+  gainNode.connect(audioContext.destination);
+
+  oscillator.type = 'sine';
+  oscillator.frequency.setValueAtTime(1000, audioContext.currentTime); // Beep frequency
+  gainNode.gain.setValueAtTime(1, audioContext.currentTime);
+  gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5); // Beep duration
+
+  oscillator.start(audioContext.currentTime);
+  oscillator.stop(audioContext.currentTime + 0.5);
+}
+
+
+function gameOver() {
+  alert("Time's Up! Game Over!");
+  wordGrid.innerHTML = ""; // Clear the grid
+}
+
 // Initialize the game
 function initGame() {
   createGrid();
   placeWords();
   fillRandomLetters();
+  startTimer();
 
   // Display the initial score
   const scoreContainer = document.getElementById("score");
