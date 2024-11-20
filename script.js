@@ -105,7 +105,7 @@ let selectedCells = [];
 let isSelecting = false; // Flag to check if the user is currently selecting
 let selectionDirection = null; // Track the direction of the selection
 
-// Handle touch and mouse start
+// Handle mouse and touch start
 function handleStart(event) {
   // Prevent default to stop touch scrolling behavior
   event.preventDefault();
@@ -119,14 +119,22 @@ function handleStart(event) {
   }
 }
 
-// Handle touch and mouse movement
+// Handle mouse and touch movement
 function handleMove(event) {
   // Prevent default to stop touch scrolling behavior
   event.preventDefault();
 
   if (isSelecting) {
-    const cell = event.target;
-    if (cell.classList.contains("grid-cell") && !selectedCells.includes(cell)) {
+    let cell;
+    if (event.targetTouches) {
+      // For touch events, use the first touch point
+      cell = document.elementFromPoint(event.targetTouches[0].clientX, event.targetTouches[0].clientY);
+    } else {
+      // For mouse events
+      cell = event.target;
+    }
+
+    if (cell && cell.classList.contains("grid-cell") && !selectedCells.includes(cell)) {
       const lastSelectedCell = selectedCells[selectedCells.length - 1];
 
       // Calculate difference in rows and columns
@@ -161,7 +169,7 @@ function handleMove(event) {
   }
 }
 
-// Handle touch and mouse end
+// Handle mouse and touch end
 function handleEnd() {
   if (isSelecting) {
     checkWordMatch(); // Check if the dragged cells form a word
@@ -203,6 +211,11 @@ function initGame() {
   wordGrid.addEventListener("mousedown", handleStart);
   wordGrid.addEventListener("mousemove", handleMove);
   wordGrid.addEventListener("mouseup", handleEnd);
+
+  // Touch events for mobile and tablets
+  wordGrid.addEventListener("touchstart", handleStart);
+  wordGrid.addEventListener("touchmove", handleMove);
+  wordGrid.addEventListener("touchend", handleEnd);
 }
 
 // Start the game by loading words
