@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,5 +16,67 @@
         <button id="restart-game" onclick="restartGame()">Play Again</button>
     </div>
     <script src="../public/js/results.js"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        .scoreboard {
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .scoreboard h1 {
+            margin-bottom: 10px;
+        }
+        .scoreboard p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="scoreboard">
+        <h1>Game Over</h1>
+        <p><strong>Name:</strong> <span id="user-name"></span></p>
+        <p><strong>Email:</strong> <span id="user-email"></span></p>
+        <p><strong>Score:</strong> <span id="score"></span></p>
+        <p><strong>Matched Words:</strong> <span id="matched-words"></span></p>
+        <p><strong>Total Words:</strong> <span id="total-words"></span></p>
+        <p><strong>Remaining Time:</strong> <span id="remaining-time"></span> seconds</p>
+        <p><strong>Last Matched Word Time:</strong> <span id="last-matched-time"></span> seconds</p>
+    </div>
+    <script>
+        // Retrieve data from localStorage
+        const userName = localStorage.getItem("userName") || "Guest";
+        const userEmail = localStorage.getItem("userEmail") || "guest@example.com";
+        const score = localStorage.getItem("score") || 0;
+        const matchedWords = localStorage.getItem("matchedWords") || 0;
+        const totalWords = localStorage.getItem("totalWords") || 0;
+        const remainingTime = localStorage.getItem("remainingTime") || 0;
+        const lastMatchedTime = localStorage.getItem("lastMatchedTime") || "N/A";
+
+        // Display the data
+        document.getElementById("user-name").textContent = userName;
+        document.getElementById("user-email").textContent = userEmail;
+        document.getElementById("score").textContent = score;
+        document.getElementById("matched-words").textContent = matchedWords;
+        document.getElementById("total-words").textContent = totalWords;
+        document.getElementById("remaining-time").textContent = remainingTime;
+        document.getElementById("last-matched-time").textContent = lastMatchedTime;
+    </script>
 </body>
 </html>

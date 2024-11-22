@@ -1,14 +1,15 @@
-const gridSize = 17; // 17x17 grid
 const wordGrid = document.getElementById("word-grid");
 let words = []; // To hold words from XML
 let score = 0; // Initialize score
-let timeLeft = 60; // Set the countdown time in seconds
 let timerInterval; // To store the timer interval
 let matchedWords = [];
+let lastMatchedTime = null;
+const gridSize = parseInt(localStorage.getItem("gridSize")) || 17; // Default to 17 if not set
+let timeLeft = parseInt(localStorage.getItem("timerDuration")) || 60; // Default to 60 seconds
 
 // Fetch words from XML file
 function loadWords() {
-  fetch('words.xml')  // Load the XML file (ensure it's in the same directory)
+  fetch('../public/xml/words.xml')  // Load the XML file (ensure it's in the same directory)
     .then(response => response.text())
     .then(str => {
       const parser = new DOMParser();
@@ -21,7 +22,7 @@ function loadWords() {
       }
 
       // Randomly select 5 words if there are more than 5
-      if (words.length > 5) {
+      if (words.length >5) {
         words = getRandomWords(words, 5);  // Get 5 random words
       }
 
@@ -209,9 +210,19 @@ function checkWordMatch() {
     const wordToAdd = words.includes(selectedWord) ? selectedWord : reversedWord;
     if (!matchedWords.includes(wordToAdd)) {
       matchedWords.push(wordToAdd);
+
+      // Save the current remaining time as the last matched time
+      lastMatchedTime = timeLeft;
     }
 
     updateScore(); // Update the score when a word is matched
+  }
+
+  // Check if all words are matched
+  if (matchedWords.length === words.length) {
+    clearInterval(timerInterval); // Stop the timer
+    localStorage.setItem("remainingTime", timeLeft); // Save remaining time
+    gameOver(); // End the game
   }
 }
 
@@ -267,18 +278,24 @@ function playBeep() {
   oscillator.stop(audioContext.currentTime + 0.5);
 }
 
-
 function gameOver() {
-  // Save the score and matched words to localStorage
+  clearInterval(timerInterval); // Ensure the timer is stopped
+
+  // Save data to localStorage
   localStorage.setItem("score", score);
   localStorage.setItem("matchedWords", matchedWords.length);
   localStorage.setItem("totalWords", words.length);
+  localStorage.setItem("remainingTime", timeLeft); // Save remaining time
+  localStorage.setItem("lastMatchedTime", lastMatchedTime); // Save last matched time
 
-  const userName = localStorage.getItem('userName');
-  const userEmail = localStorage.getItem('userEmail');
+  const userName = localStorage.getItem("userName") || "Guest";
+  const userEmail = localStorage.getItem("userEmail") || "guest@example.com";
+
+  localStorage.setItem("userName", userName); // Save user name
+  localStorage.setItem("userEmail", userEmail); // Save user email
 
   // Redirect to the results page
-  window.location.href = "results.html"; // Replace with your results page URL
+  window.location.href = "results.html";
 }
 
 // Initialize the game
