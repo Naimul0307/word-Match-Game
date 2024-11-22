@@ -56,7 +56,8 @@ function createGrid() {
 function placeWords() {
   words.forEach((word) => {
     // const direction = ["horizontal", "vertical", "diagonal", "reverse-horizontal", "reverse-vertical"][Math.floor(Math.random() * 5)];
-    const direction = ["horizontal", "vertical", "reverse-horizontal", "reverse-vertical"][Math.floor(Math.random() * 4)];
+    // const direction = ["horizontal", "vertical", "reverse-horizontal", "reverse-vertical"][Math.floor(Math.random() * 4)];
+    const direction = ["horizontal", "vertical"][Math.floor(Math.random() * 2)];
     let placed = false;
     while (!placed) {
       const startRow = Math.floor(Math.random() * gridSize);
@@ -78,8 +79,8 @@ function canPlaceWord(word, row, col, direction) {
   if (direction === "horizontal" && col + word.length > gridSize) return false;
   if (direction === "vertical" && row + word.length > gridSize) return false;
   // if (direction === "diagonal" && (row + word.length > gridSize || col + word.length > gridSize)) return false;
-  if (direction === "reverse-horizontal" && col - word.length < -1) return false;
-  if (direction === "reverse-vertical" && row - word.length < -1) return false;
+  // if (direction === "reverse-horizontal" && col - word.length < -1) return false;
+  // if (direction === "reverse-vertical" && row - word.length < -1) return false;
 
   for (let i = 0; i < word.length; i++) {
     const cell = getCellForWordPlacement(row, col, direction, i);
@@ -97,10 +98,10 @@ function getCellForWordPlacement(row, col, direction, index) {
       return document.querySelector(`[data-row="${row + index}"][data-col="${col}"]`);
     // case "diagonal":
     //   return document.querySelector(`[data-row="${row + index}"][data-col="${col + index}"]`);
-    case "reverse-horizontal":
-      return document.querySelector(`[data-row="${row}"][data-col="${col - index}"]`);
-    case "reverse-vertical":
-      return document.querySelector(`[data-row="${row - index}"][data-col="${col}"]`);
+    // case "reverse-horizontal":
+    //   return document.querySelector(`[data-row="${row}"][data-col="${col - index}"]`);
+    // case "reverse-vertical":
+    //   return document.querySelector(`[data-row="${row - index}"][data-col="${col}"]`);
     default:
       return null;
   }
