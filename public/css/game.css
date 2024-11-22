@@ -1,3 +1,11 @@
+/* Load the GaMaamli-Regular font */
+/* @font-face {
+    font-family: 'GaMaamli-Regular';
+    src: url('../fonts/GaMaamli-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+} */
+
 * {
   margin: 0;
   padding: 0;
@@ -13,14 +21,12 @@ body, html {
   width: 100%;
   height: 100%;  /* Ensure full height for the body */
   overflow-x: hidden; /* Prevent horizontal scroll */
-  background-image: url('background.jpeg'); /* Background image URL */
+  background-image: url('../background/background-p.jpeg'); /* Background image URL */
   background-size: cover; /* Cover the entire background */
   background-position: center; /* Center the background image */
   background-repeat: no-repeat; /* Prevent background image from repeating */
   color: #000000; /* Default text color for body */
 }
-
-
 
 #timer-wrapper {
   width: auto;
@@ -37,7 +43,7 @@ body, html {
 
 #time-text {
   font-size: 25px; /* Smaller font size for "Time Left" text */
-  font-weight: bold;
+  font-weight: bolder;
   color: #333;
   margin-bottom: 5px; /* Space between the text and the circle */
 }
@@ -46,7 +52,7 @@ body, html {
   width: 100px;
   height: 100px;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: bolder;
   color: #333;
   background-color: rgba(255, 255, 255, 0.7);
   display: flex;
@@ -55,7 +61,7 @@ body, html {
   align-items: center;
   border-radius: 50%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  border: 10px solid #609462; /* Start with green */
+  border: 10px solid #cacfca; /* Start with green */
   transition: border-color 6s linear; /* Smooth and slow color transition */
 }
 
@@ -68,10 +74,12 @@ body, html {
 
 #time-left {
   font-size: 28px; /* Larger font size for the time */
+  font-weight: bolder;
 }
 
 #sec {
   font-size: 14px; /* Smaller font size for "SEC" */
+  font-weight: bolder;
   margin-top: 5px; /* Space between the number and "SEC" */
 }
 
@@ -99,13 +107,6 @@ body, html {
   font-size: 30px;
   font-weight: bold;
   color: #333;
-  /* background-color: rgba(255, 255, 255, 0.7);
-  padding: 5px 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  font-family: 'Arial', sans-serif;
-  z-index: 10;
-  border: 5px solid transparent;  */
 }
 
 #game-container {
@@ -144,7 +145,7 @@ body, html {
 }
 
 .grid-cell.selected {
-  background-color: yellow;
+  background-color: rgb(182, 182, 180);
 }
 
 .grid-cell.matched {
@@ -169,7 +170,7 @@ body, html {
 @media screen and (min-width: 1080px) and (max-height: 1920px) and (orientation: portrait) {
  
   body {
-    background-image: url('background.jpeg'); /* Background image URL */
+    background-image: url('../background/background-p.jpeg'); /* Background image URL */
     background-size: cover; /* Cover the entire background */
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Prevent background image from repeating */
@@ -209,6 +210,23 @@ body, html {
   width: 150px;
   height: 150px;
   }
+
+  #time-left {
+    font-size: 40px; /* Larger font size for the time */
+    font-weight: bolder;
+  }
+  
+  #sec {
+    font-size: 25px; /* Smaller font size for "SEC" */
+    font-weight: bolder;
+  }
+
+  #time-text {
+    font-size: 45px; /* Smaller font size for "Time Left" text */
+    font-weight: bolder;
+  
+  }
+
   #words-to-find {
     font-size: 16px; /* Smaller font for words-to-find list */
   }

@@ -1,4 +1,11 @@
-
+/* Load the GaMaamli-Regular font */
+/* @font-face {
+    font-family: 'GaMaamli-Regular';
+    src: url('../fonts/GaMaamli-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+} */
+ 
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +19,7 @@ body,html {
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 18px; /* Adjust base font size */
     font-weight: 400;
-    background-image: url('background.jpeg'); /* Background image URL */
+    background-image: url('../background/background-p1.jpeg'); /* Background image URL */
     background-size: cover; /* Cover the entire background */
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Prevent background image from repeating */
@@ -44,7 +51,7 @@ h1{
     padding: 40px; /* Increase padding */
     /* background: linear-gradient(to right, rgba(75, 173, 99, 0.4), rgba(34, 37, 34, 0.4), rgba(42, 45, 218, 0.5)); Gradient background with reduced opacity */
     border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 0 20px rgba(207, 124, 124, 0.3); /* Shadow for depth */
+    box-shadow: 0 0 20px rgb(207, 124, 124, 0.3); /* Shadow for depth */
     font-size: 30px; /* Increase font size within the section */
     color: #111010; /* Text color for content inside section */
 }
@@ -54,9 +61,9 @@ h1{
     padding: 15px 30px; /* Increase button padding */
     font-size: 1.1em !important; /* Increase button font size */
     font-weight: bolder !important;
-    background-color: rgba(219,227,214,255);
-    color: black;
-    box-shadow: 0 20px 12px rgba(20, 20, 20, 0.404); /* Increased bottom shadow */
+    background-color: rgb(202, 36, 77) !important;
+    color: rgb(248, 248, 248) !important;
+    box-shadow: 0 20px 12px rgb(20, 20, 20, 0.404); /* Increased bottom shadow */
     text-transform: uppercase;
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Add transition for smooth animation */
     width: 200px;
@@ -65,14 +72,13 @@ h1{
 
 
 .btn:hover{
-    background: linear-gradient(30deg,rgba(175,195,167,255), rgba(234,239,232,255), rgba(192,207,184,255));
+    background: linear-gradient(30deg,rgb(202, 36, 77), rgb(234,239,232,255), rgb(192,207,184,255));
     color: black;
 }
 .btn:active {
     transform: translateY(8px); /* Push the button down slightly on click */
-    box-shadow: 0 6px 12px rgba(20, 20, 20, 0.6); /* Adjusted shadow for active state */
+    box-shadow: 0 6px 12px rgb(20, 20, 20, 0.6); /* Adjusted shadow for active state */
 }
-
 
 #user-form {
     margin-top: 20px;
@@ -145,12 +151,12 @@ body {
     font-family: 'Helvetica Neue', sans-serif;
     font-size: 18px; /* Adjust base font size */
     font-weight: 400;
-    background-image: url('background.jpeg'); /* Background image URL */
+    background-image: url('../background/background-p1.jpeg'); /* Background image URL */
     background-size: cover; /* Cover the entire background */
     background-position: center; /* Center the background image */
     background-repeat: no-repeat; /* Prevent background image from repeating */
     margin: 0;
     padding: 0;
-    color: #ffffff; /* Default text color for body */
+    color: #0f0f0f; /* Default text color for body */
 }
 }

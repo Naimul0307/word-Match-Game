@@ -1,0 +1,150 @@
+/* Load the GaMaamli-Regular font */
+/* @font-face {
+    font-family: 'GaMaamli-Regular';
+    src: url('../fonts/GaMaamli-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+} */
+ 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Custom CSS */
+body, html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Ensures full viewport height */
+    width: 100%;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 18px; /* Adjust base font size */
+    font-weight: 400;
+    background-image: url('../background/background-p1.jpeg'); /* Background image URL */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+    color: #141414; /* Default text color for body */
+    overflow: hidden; /* Prevent unnecessary scrolling */
+}
+
+/* Full-page container */
+.results-container {
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Arrange items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    background-image: url('../background/background-p1.jpeg'); /* Background image URL */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent background image from repeating */
+    box-shadow: none; /* Remove shadow for full-page layout */
+    text-align: center; /* Center align text */
+    animation: fadeIn 2s ease; /* Fade-in animation */
+}
+
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Adjust title and spacing for better proportions */
+h1 {
+    font-size: 6em; /* Larger title font size */
+    font-weight: bolder;
+    margin-bottom: 20px; /* Add space below the title */
+}
+
+p {
+    font-size: 2.5em; /* Larger font for the summary */
+    font-weight: bolder;
+    margin-bottom: 30px; /* Add space below the paragraph */
+}
+
+#score-display {
+    font-size: 7.5em; /* Larger font for the score */
+    font-weight: bolder;
+    margin: 20px 0; /* Adjust spacing around the score */
+    color: rgba(202, 36, 77, 0.774);
+    animation: scaleUp 2s ease-in-out; /* Scale-up animation */
+}
+
+/* Center the button and adjust its style */
+button {
+    padding: 20px 40px; /* Increased padding for larger size */
+    font-size: 2.5em; /* Bigger font size */
+    font-weight: bolder;
+    background: rgb(202, 36, 77);
+    color: #e3e8ee;
+    border: 2px solid rgb(212, 212, 212);
+    border-radius: 15px; /* Slightly larger border radius for rounded edges */
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect */
+button:hover {
+    background-color: #4a8a3a; /* Gold color on hover */
+    transform: scale(1.15); /* Slightly larger scale on hover */
+}
+
+.time-up {
+    color: red; /* Red for "Time's Up!" */
+}
+
+.congrats {
+    color: green; /* Green for "Congratulations!" */
+}
+
+
+/* Animation */
+@keyframes scaleUp {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Specific Media Query for 1080x1920 Resolution (Portrait) */
+@media screen and (min-width: 1080px) and (max-height: 1920px) and (orientation: portrait) {
+
+    body {
+        /* font-family: 'GaMaamli-Regular', Arial, sans-serif; */
+        font-family: 'Helvetica Neue', sans-serif;
+        font-size: 18px; /* Adjust base font size */
+        font-weight: 400;
+        background-image: url('../background/background-p1.jpeg'); /* Background image URL */
+        background-size: cover; /* Cover the entire background */
+        background-position: center; /* Center the background image */
+        background-repeat: no-repeat; /* Prevent background image from repeating */
+        margin: 0;
+        padding: 0;
+        color: #161515; /* Default text color for body */
+    }
+}
+    

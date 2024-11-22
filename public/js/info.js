@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.setItem('userEmail', userEmail);
 
             setTimeout(function () {
-                window.location.href = 'index.html';
+                window.location.href = 'game.html';
             });
         });
     }
