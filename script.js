@@ -4,6 +4,7 @@ let words = []; // To hold words from XML
 let score = 0; // Initialize score
 let timeLeft = 60; // Set the countdown time in seconds
 let timerInterval; // To store the timer interval
+let matchedWords = [];
 
 // Fetch words from XML file
 function loadWords() {
@@ -203,6 +204,13 @@ function checkWordMatch() {
 
   if (words.includes(selectedWord) || words.includes(reversedWord)) {
     selectedCells.forEach((cell) => cell.classList.add("matched"));
+
+    // Add the matched word to the matchedWords array if it's not already added
+    const wordToAdd = words.includes(selectedWord) ? selectedWord : reversedWord;
+    if (!matchedWords.includes(wordToAdd)) {
+      matchedWords.push(wordToAdd);
+    }
+
     updateScore(); // Update the score when a word is matched
   }
 }
@@ -217,6 +225,7 @@ function updateScore() {
 // Timer functionality with beep and animation
 function startTimer() {
   const timerDisplay = document.getElementById("time-left");
+  const timerElement = document.getElementById("timer");
 
   timerInterval = setInterval(() => {
     if (timeLeft > 0) {
@@ -227,8 +236,11 @@ function startTimer() {
       if (timeLeft <= 10) {
         timerDisplay.classList.add("time-low"); // Add animation class
         playBeep(); // Play the beep sound
+        timerElement.style.borderColor = 'red'; // Slowly transition to re
+      } else if (timeLeft <= 30) {
+        timerElement.style.borderColor = 'yellow'; // Slowly transition to yellow
       } else {
-        timerDisplay.classList.remove("time-low"); // Remove animation class
+        timerElement.style.borderColor = '#4CAF50'; // Slowly transition to gree
       }
     } else {
       clearInterval(timerInterval);
@@ -236,6 +248,7 @@ function startTimer() {
     }
   }, 1000);
 }
+
 
 function playBeep() {
   const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -256,8 +269,16 @@ function playBeep() {
 
 
 function gameOver() {
-  alert("Time's Up! Game Over!");
-  wordGrid.innerHTML = ""; // Clear the grid
+  // Save the score and matched words to localStorage
+  localStorage.setItem("score", score);
+  localStorage.setItem("matchedWords", matchedWords.length);
+  localStorage.setItem("totalWords", words.length);
+
+  const userName = localStorage.getItem('userName');
+  const userEmail = localStorage.getItem('userEmail');
+
+  // Redirect to the results page
+  window.location.href = "results.html"; // Replace with your results page URL
 }
 
 // Initialize the game
@@ -265,7 +286,6 @@ function initGame() {
   createGrid();
   placeWords();
   fillRandomLetters();
-  startTimer();
 
   // Display the initial score
   const scoreContainer = document.getElementById("score");
@@ -280,6 +300,11 @@ function initGame() {
   wordGrid.addEventListener("touchstart", handleStart);
   wordGrid.addEventListener("touchmove", handleMove);
   wordGrid.addEventListener("touchend", handleEnd);
+
+  // Delay the timer start by 2 seconds
+  setTimeout(() => {
+    startTimer();
+  }, 2000); // 2000 milliseconds = 2 seconds
 }
 
 // Start the game by loading words
