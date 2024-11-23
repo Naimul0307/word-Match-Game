@@ -40,7 +40,7 @@ function displayResults() {
 
     // Redirect to the index page after 10 seconds
     setTimeout(() => {
-        window.location.href = "index.html"; // Replace with your main game page URL
+        window.location.href = "scorboar.html"; // Replace with your main game page URL
     }, 10000);
 }
 
@@ -61,7 +61,7 @@ function animateScore(start, end) {
 
 // Restart the game
 function restartGame() {
-    window.location.href = "index.html"; // Replace with your main game page URL
+    window.location.href = "scorboar.html"; // Replace with your main game page URL
 }
 
 // Initialize the results page
