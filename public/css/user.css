@@ -72,9 +72,10 @@ h1{
 
 
 .btn:hover{
-    background: linear-gradient(30deg,rgb(202, 36, 77), rgb(234,239,232,255), rgb(192,207,184,255));
-    color: black;
+    background: linear-gradient(30deg,rgb(202, 36, 77), rgb(234,239,232,255), rgb(192,207,184,255)) !important;
+    color: rgb(248, 248, 248);
 }
+
 .btn:active {
     transform: translateY(8px); /* Push the button down slightly on click */
     box-shadow: 0 6px 12px rgb(20, 20, 20, 0.6); /* Adjusted shadow for active state */
@@ -98,49 +99,6 @@ input[type=email] {
     border-radius: 20px; /* Rounded corners for inputs */
     box-shadow: 0 20px 12px rgba(20, 20, 20, 0.404); /* Increased bottom shadow */
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Add transition for smooth animation */
-}
-
-@media (max-width: 768px) {
-    .section {
-        padding: 30px; /* Adjust padding for smaller screens */
-    }
-    
-    .btn {
-        padding: 12px 24px; /* Adjust button padding for smaller screens */
-        font-size: 1em; /* Adjust button font size for smaller screens */
-    }
-    
-    .table-responsive {
-        overflow-x: auto; /* Enable horizontal scrolling on smaller screens */
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* Custom CSS for styling and positioning */
-
-.keyboard-container {
-    background-color: #f8f9fa;
-    max-width: 400px; /* Adjust maximum width as needed */
-    z-index: 1000; /* Ensure it's above other elements */
-    touch-action: none; /* Disable default touch actions */
-}
-
-.resize-handle {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
-    cursor: nwse-resize; /* Cursor for resize handle */
-    background-color: #007bff;
 }
 
 /* Specific Media Query for 1080x1920 Resolution (Portrait) */

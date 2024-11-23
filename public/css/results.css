@@ -102,13 +102,85 @@ button {
     border: 2px solid rgb(212, 212, 212);
     border-radius: 15px; /* Slightly larger border radius for rounded edges */
     cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-/* Hover effect */
-button:hover {
-    background-color: #4a8a3a; /* Gold color on hover */
-    transform: scale(1.15); /* Slightly larger scale on hover */
+/* Top Scores Container */
+#top-scores-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #ff4e50, #f9d423); /* Gradient background */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    margin: 20px auto;
+    color: black;
+    text-align: center;
+}
+
+/* Header Styling */
+#top-scores-container h2 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* Table Styling */
+#top-scores-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#top-scores-table th, #top-scores-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+}
+
+#top-scores-table th {
+    background: linear-gradient(to right, #6dd5fa, #2980b9); /* Gradient for table header */
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#top-scores-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* Zebra striping */
+}
+
+#top-scores-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Styling */
+.redirect-button {
+    padding: 15px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(to right, #f85032, #e73827); /* Gradient button background */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.redirect-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.redirect-button:active {
+    transform: translateY(2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .time-up {
