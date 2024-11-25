@@ -71,43 +71,51 @@ function animateScore(start, end) {
     }, 50); // Adjust speed of animation
 }
 
-// Function to display the top 10 scores
-function displayTopScores() {
-    // Retrieve the previous top scores from localStorage
+  
+  function displayTopScores() {
+    // Get existing scores from localStorage (or initialize an empty array if not present)
     let topScores = JSON.parse(localStorage.getItem("topScores")) || [];
-
-    // Sort the top scores:
-    // 1. Sort by score (descending)
-    // 2. If the score is equal, sort by remaining time (descending)
-    // 3. If remaining time is zero, sort by last matched time (descending)
-    topScores.sort((a, b) => {
-        if (b.score === a.score) {
-            if (b.time === a.time) {
-                return b.lastMatchedTime - a.lastMatchedTime; // Sort by last matched time if score and time are equal
-            }
-            return b.time - a.time;  // Sort by remaining time if scores are equal
-        }
-        return b.score - a.score;  // Sort by score
+  
+    // Push the current score and name into the array
+    const userName = localStorage.getItem("userName") || "Guest";
+    const userEmail = localStorage.getItem("userEmail") || "guest@example.com";
+    const userScore = localStorage.getItem("score");
+    const userLastMatchTime = localStorage.getItem("lastMatchedTime")
+    const userTime = localStorage.getItem("remainingTime");
+  
+    topScores.push({
+      name: userName,
+      email: userEmail,
+      score: userScore,
+      time: userTime,
+      lastMatchTime : userLastMatchTime 
     });
-
+  
+    // Sort the scores in descending order (by score)
+    topScores.sort((a, b) => b.score - a.score);
+  
     // Keep only the top 10 scores
     topScores = topScores.slice(0, 10);
-
-    // Display the top 10 scores in the table
-    const topScoresTableBody = document.getElementById("top-scores-table").getElementsByTagName('tbody')[0];
-    topScores.forEach((entry, index) => {
-        const row = topScoresTableBody.insertRow();
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${entry.name}</td>
-            <td>${entry.score}</td>
-            <td>${entry.time > 0 ? entry.time : entry.lastMatchedTime}</td>
-        `;
+  
+    // Save the updated scores back to localStorage
+    localStorage.setItem("topScores", JSON.stringify(topScores));
+  
+    // Insert the top scores into the table
+    const topScoresTable = document.getElementById("top-scores-table").getElementsByTagName('tbody')[0];
+    topScoresTable.innerHTML = ''; // Clear the table
+  
+    topScores.forEach((score, index) => {
+      const row = topScoresTable.insertRow();
+      row.insertCell(0).textContent = index + 1;
+      row.insertCell(1).textContent = score.name;
+      row.insertCell(2).textContent = score.email;
+      row.insertCell(3).textContent = score.score;
+      row.insertCell(4).textContent = score.time;
+      row.insertCell(5).textContent = score.lastMatchTime;
     });
-
-    // Show the top scores container
-    document.getElementById("top-scores-container").style.display = "block";
-}
+  
+    document.getElementById("top-scores-container").style.display = 'block';
+  }
 
 // Handle the "Back" button click
 document.getElementById("back-btn").addEventListener("click", function() {
