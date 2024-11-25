@@ -1,0 +1,22 @@
+{
+  "name": "electron-app",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "npx electron .",
+    "package-win": "electron-packager . electron-app --platform=win32 --arch=x64 --out=dist --electron-version=33.2.0 --icon=icon.ico --overwrite"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-packager": "^17.1.2"
+  },
+  "dependencies": {
+    "debug": "^4.3.7",
+    "simple-keyboard": "^3.8.17",
+    "supports-color": "^9.4.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

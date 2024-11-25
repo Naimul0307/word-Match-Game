@@ -1,33 +1,28 @@
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     if (window.location.pathname.endsWith('index.html')) {
-        const videoElement = document.getElementById('video-player'); // Your video element
-        const videoSource = document.getElementById('video-source'); // Video source element
-    
+        const videoElement = document.getElementById('video-player');
+        const videoSource = document.getElementById('video-source');
+
         function updateVideoSource() {
-            // Check the orientation of the device
             if (window.innerHeight > window.innerWidth) {
                 // Portrait mode
-                videoSource.src = '../public/videos/portrait.mp4'; // Load portrait video
+                videoSource.src = '../public/videos/portrait.mp4';
             } else {
                 // Landscape mode
-                videoSource.src = '../public/videos/landscape.mp4'; // Load landscape video
+                videoSource.src = '../public/videos/landscape.mp4';
             }
-            // Reload the video to apply the new source
             videoElement.load();
         }
-    
-        // Initial video source update on page load
+
+        // Initial update
         updateVideoSource();
-    
-        // Update video source on orientation change or resize
+
+        // Listen to resize events
         window.addEventListener('resize', updateVideoSource);
-    
-        // Optional: Add click event to redirect when the video is clicked
-        if (videoElement) {
-            videoElement.addEventListener('click', function () {
-                window.location.href = 'info.html'; // Redirect to the main page
-            });
-        } 
+
+        // Redirect on video click
+        videoElement.addEventListener('click', () => {
+            window.location.href = 'user.html';
+        });
     }
 });
-
