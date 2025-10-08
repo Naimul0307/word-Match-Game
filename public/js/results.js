@@ -18,11 +18,17 @@ function displayResults() {
     const scoreDisplay = document.getElementById("score-display");
     const tryAgainMessage = document.getElementById("try-again-message");
 
-    if (score > 0) {
-        resultMessage.textContent = "Congratulations!";
+    // ✅ Determine final result condition
+    const allWordsMatched = matchedWords === totalWords && totalWords > 0;
+    const hasScore = score > 0;
+
+    if (allWordsMatched && hasScore) {
+        // 🎉 Win condition
+        resultMessage.textContent = "🎉 Congratulations!";
         resultMessage.classList.add("congrats");
     } else {
-        resultMessage.textContent = "Time's Up!";
+        // ❌ Fail condition
+        resultMessage.textContent = "❌ Fail!";
         resultMessage.classList.add("time-up");
     }
 
@@ -34,7 +40,7 @@ function displayResults() {
     }, 2500);
 
     setTimeout(() => {
-        if (matchedWords < totalWords) {
+        if (!allWordsMatched) {
             tryAgainMessage.textContent = "Try Again!";
             tryAgainMessage.classList.add("visible");
         }
@@ -49,6 +55,7 @@ function displayResults() {
         window.location.href = "index.html";
     }, 30000);
 }
+
 
 // Animate the score counter
 function animateScore(start, end) {
