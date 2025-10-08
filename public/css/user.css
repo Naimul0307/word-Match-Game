@@ -1,10 +1,10 @@
-/* Load the GaMaamli-Regular font */
-/* @font-face {
-    font-family: 'GaMaamli-Regular';
-    src: url('../fonts/GaMaamli-Regular.ttf') format('truetype');
+
+@font-face {
+    font-family: "Noto Sans", sans-serif;
+    src: url('../fonts/NotoSans-VariableFont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-} */
+}
  
 * {
   margin: 0;
@@ -16,20 +16,20 @@
 body,html {
   height: 100%;
   width: 100%;
-  font-family: 'Helvetica Neue', sans-serif;
-  font-size: 18px; /* Adjust base font size */
+  font-family: "Noto Sans", sans-serif;
+  font-size: 18px; 
   font-weight: 400;
-  background-image: url('../background/background-p1.jpeg'); /* Background image URL */
-  background-size: cover; /* Cover the entire background */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent background image from repeating */
-  color: #000000; /* Default text color for body */
+  background-image: url('../background/user.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fdfdfd;
 }
 
   
 h1{
   flex: 1;
-  font-size: 2em; /* Increased font size */
+  font-size: 2em;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -42,49 +42,49 @@ h1{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh; /* Ensure full viewport height */
+  min-height: 100vh;
 }
 
 .section {
   width: 100%;
   max-width: 900px;
   text-align: center;
-  padding: 40px; /* Increase padding */
+  padding: 40px;
   /* background: linear-gradient(to right, rgba(75, 173, 99, 0.4), rgba(34, 37, 34, 0.4), rgba(42, 45, 218, 0.5)); Gradient background with reduced opacity */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 0 20px rgb(207, 124, 124, 0.3); /* Shadow for depth */
-  font-size: 30px; /* Increase font size within the section */
-  color: #111010; /* Text color for content inside section */
+  border-radius: 10px; 
+  box-shadow: 0 0 20px rgb(207, 124, 124, 0.3); 
+  font-size: 30px;
+  color: #fdfdfd;
 }
 
 .btn {
   margin: 10px;
-  padding: 15px 30px; /* Increase button padding */
-  font-size: 1.1em !important; /* Increase button font size */
+  padding: 15px 30px;
+  font-size: 1.1em !important; 
   font-weight: bolder !important;
-  background-color: rgb(202, 36, 77) !important;
+  background-color:rgba(7, 200, 133)!important;
   color: rgb(248, 248, 248) !important;
-  box-shadow: 0 20px 12px rgb(20, 20, 20, 0.404); /* Increased bottom shadow */
+  box-shadow: 0 20px 12px rgb(20, 20, 20, 0.404); 
   text-transform: uppercase;
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Add transition for smooth animation */
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; 
   width: 200px;
   height: 100px;
 }
 
 
 .btn:hover{
-  background: linear-gradient(30deg,rgb(202, 36, 77), rgb(234,239,232,255), rgb(192,207,184,255)) !important;
+  background: linear-gradient(30deg,rgba(7, 200, 133), rgb(234,239,232,255), rgba(15, 40, 95)) !important;
   color: rgb(248, 248, 248);
 }
 
 .btn:active {
-  transform: translateY(8px); /* Push the button down slightly on click */
-  box-shadow: 0 6px 12px rgb(20, 20, 20, 0.6); /* Adjusted shadow for active state */
+  transform: translateY(8px); 
+  box-shadow: 0 6px 12px rgb(20, 20, 20, 0.6);
 }
 
 #user-form {
   margin-top: 20px;
-  text-align: left;
+  text-align: center;
   flex: 1;
   font-weight: bold;
   text-transform: uppercase;
@@ -94,29 +94,19 @@ h1{
 /* Adjust input text size */
 input[type=email],
 input[type=text] {
-  font-size: 1.2em; /* Adjust input text size */
-  padding: 10px; /* Adjust input padding */
+  font-size: 1.2em;
+  padding: 10px;
   margin: 20px;
-  border-radius: 20px; /* Rounded corners for inputs */
-  box-shadow: 0 20px 12px rgba(20, 20, 20, 0.404); /* Increased bottom shadow */
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Add transition for smooth animation */
+  border-radius: 20px; 
+  box-shadow: 0 20px 12px rgba(20, 20, 20, 0.404); 
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
 }
 
 /* Specific Media Query for 1080x1920 Resolution (Portrait) */
 @media screen and (min-width: 1080px) and (max-height: 1920px) and (orientation: portrait) {
 
   body {
-      /* font-family: 'GaMaamli-Regular', Arial, sans-serif; */
-      font-family: 'Helvetica Neue', sans-serif;
-      font-size: 18px; /* Adjust base font size */
-      font-weight: 400;
-      background-image: url('../background/background-p1.jpeg'); /* Background image URL */
-      background-size: cover; /* Cover the entire background */
-      background-position: center; /* Center the background image */
-      background-repeat: no-repeat; /* Prevent background image from repeating */
-      margin: 0;
-      padding: 0;
-      color: #0f0f0f; /* Default text color for body */
+      background-image: url('../background/user.jpg'); 
   }
   }
   

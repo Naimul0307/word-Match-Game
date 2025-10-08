@@ -6,118 +6,103 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Function to display results
 function displayResults() {
-    // Get score and word data from localStorage
     const score = parseInt(localStorage.getItem("score"), 10) || 0;
     const matchedWords = parseInt(localStorage.getItem("matchedWords"), 10) || 0;
     const totalWords = parseInt(localStorage.getItem("totalWords"), 10) || 0;
 
-    // Display matched and total words
     document.getElementById("matched-words").textContent = matchedWords;
     document.getElementById("total-words").textContent = totalWords;
 
     const resultMessage = document.getElementById("result-message");
     const resultSummary = document.getElementById("result-summary");
     const scoreDisplay = document.getElementById("score-display");
+    const tryAgainMessage = document.getElementById("try-again-message");
 
-    // Determine if the user ran out of time or scored points
     if (score > 0) {
         resultMessage.textContent = "Congratulations!";
-        resultMessage.classList.add("congrats"); // Apply green color
+        resultMessage.classList.add("congrats");
     } else {
         resultMessage.textContent = "Time's Up!";
-        resultMessage.classList.add("time-up"); // Apply red color
+        resultMessage.classList.add("time-up");
     }
 
-    // Show the "Time's Up!" or "Congratulations!" message with animation
-    setTimeout(() => {
-        resultMessage.classList.add("visible");
-    }, 500);
-
-    // Show the result summary after 1 second
-    setTimeout(() => {
-        resultSummary.classList.add("visible");
-    }, 1500);
-
-    // Animate and display the score after 2 seconds
+    setTimeout(() => resultMessage.classList.add("visible"), 500);
+    setTimeout(() => resultSummary.classList.add("visible"), 1500);
     setTimeout(() => {
         scoreDisplay.classList.add("visible");
         animateScore(0, score);
     }, 2500);
 
-    // After 5 seconds, hide results-container and show top scores
     setTimeout(() => {
-        document.getElementById("results-container").style.display = "none";  // Hide results
-        displayTopScores();  // Display the top scores table
-    }, 10000);  // Wait for 5 seconds before showing the top scores
+        if (matchedWords < totalWords) {
+            tryAgainMessage.textContent = "Try Again!";
+            tryAgainMessage.classList.add("visible");
+        }
+    }, 5000);
 
-    // Redirect to the home page after 25 seconds (5s for results, 20s for top scores)
     setTimeout(() => {
-        window.location.href = "index.html"; // Redirect to the home page
+        document.getElementById("results-container").style.display = "none";
+        displayTopScores();
+    }, 10000);
+
+    setTimeout(() => {
+        window.location.href = "index.html";
     }, 30000);
 }
 
-// Animate the score from 0 to the final value
+// Animate the score counter
 function animateScore(start, end) {
     const scoreDisplay = document.getElementById("score-display");
     let currentScore = start;
-
     const interval = setInterval(() => {
         if (currentScore <= end) {
-            scoreDisplay.textContent = currentScore;
+            scoreDisplay.textContent = `Score: ${currentScore}`;
             currentScore++;
         } else {
             clearInterval(interval);
         }
-    }, 50); // Adjust speed of animation
+    }, 50);
 }
 
-  
-  function displayTopScores() {
-    // Get existing scores from localStorage (or initialize an empty array if not present)
-    let topScores = JSON.parse(localStorage.getItem("topScores")) || [];
-  
-    // Push the current score and name into the array
-    const userName = localStorage.getItem("userName") || "Guest";
-    const userEmail = localStorage.getItem("userEmail") || "guest@example.com";
-    const userScore = localStorage.getItem("score");
-    const userLastMatchTime = localStorage.getItem("lastMatchedTime")
-    const userTime = localStorage.getItem("remainingTime");
-  
-    topScores.push({
-      name: userName,
-      email: userEmail,
-      score: userScore,
-      time: userTime,
-      lastMatchTime : userLastMatchTime 
-    });
-  
-    // Sort the scores in descending order (by score)
-    topScores.sort((a, b) => b.score - a.score);
-  
-    // Keep only the top 10 scores
-    topScores = topScores.slice(0, 10);
-  
-    // Save the updated scores back to localStorage
-    localStorage.setItem("topScores", JSON.stringify(topScores));
-  
-    // Insert the top scores into the table
-    const topScoresTable = document.getElementById("top-scores-table").getElementsByTagName('tbody')[0];
-    topScoresTable.innerHTML = ''; // Clear the table
-  
-    topScores.forEach((score, index) => {
-      const row = topScoresTable.insertRow();
-      row.insertCell(0).textContent = index + 1;
-      row.insertCell(1).textContent = score.name;
-      row.insertCell(2).textContent = score.email;
-      row.insertCell(3).textContent = score.score;
-      row.insertCell(4).textContent = score.time;
-      row.insertCell(5).textContent = score.lastMatchTime;
-    });
-  
-    document.getElementById("top-scores-container").style.display = 'block';
-  }
+// Display only the latest result in table and send to Excel
+// Display only top 10 valid scores (exclude score=0 or time=0)
+async function displayTopScores() {
+    let results = await window.myAPI.getResults();
 
-// Handle the "Back" button click
-document.getElementById("back-btn").addEventListener("click", function() {
-    window.location.href = "index.html"; // Redirect to home page
-});
+    if (!results || results.length === 0) {
+        console.warn("No results found.");
+        return;
+    }
+
+    // ✅ Filter out players with score = 0 or remaining time = 0/null/undefined
+    results = results.filter(r => (r.Score || 0) > 0 && (r.Remaining_Time || 0) > 0);
+
+    if (results.length === 0) {
+        console.warn("No valid scores found.");
+        document.querySelector("#top-scores-table tbody").innerHTML =
+            `<tr><td colspan="4" style="text-align:center;">No valid scores yet</td></tr>`;
+        document.getElementById("top-scores-container").style.display = "block";
+        return;
+    }
+
+    // Sort descending by Score
+    results.sort((a, b) => (b.Score || 0) - (a.Score || 0));
+
+    // Take top 10
+    const topResults = results.slice(0, 10);
+
+    const topScoresTable = document.querySelector("#top-scores-table tbody");
+    topScoresTable.innerHTML = "";
+
+    topResults.forEach((result, index) => {
+        const row = topScoresTable.insertRow();
+
+        row.insertCell(0).textContent = index + 1;            // Rank
+        row.insertCell(1).textContent = result.Name || "";   // Name
+        row.insertCell(2).textContent = result.Score || 0;   // Score
+        row.insertCell(3).textContent = result.Remaining_Time || 0; // Time
+    });
+
+    document.getElementById("top-scores-container").style.display = "block";
+}
+

@@ -15,20 +15,28 @@
         <h1 class="text-center">Settings</h1>
         <div id="settings-form">
             <form id="settings-info-form">
+              
               <div class="form-group">
-                <label for="grid-size">Grid Size (e.g., 17): </label>
+                <label for="grid-size">Grid Size (e.g., 17):</label>
                 <input type="number" id="grid-size" class="form-control" name="grid-size" value="17">
-            </div>
+              </div>
         
-            <div class="form-group">
+              <div class="form-group">
                 <label for="timer-duration">Timer Duration (seconds):</label>
                 <input type="number" id="timer-duration" class="form-control" name="timer-duration" value="60">
-            </div>
-            <button type="submit" id="settings-info-form" class="btn">Save</button>
+              </div>
+
+              <div class="form-group">
+                <label for="word-count">Word Count:</label>
+                <input type="number" id="word-count" class="form-control" name="word-count" value="7">
+              </div>
+            
+              <button type="submit" class="btn">Save</button>
             </form>
         </div>
     </div>
   </div>
+
   <script src="../public/js/settings.js"></script>
 </body>
 </html>
