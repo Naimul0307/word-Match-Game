@@ -145,7 +145,7 @@ p {
 }
 
 #top-scores-table th {
-    background: rgb(6, 31, 88);
+    background:rgba(50, 106, 129);
     color: white;
     text-transform: uppercase;
     font-weight: bold;

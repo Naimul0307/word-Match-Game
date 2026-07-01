@@ -1,15 +1,42 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, globalShortcut } = require('electron');
 const path = require('path');
 const fs = require('fs');
 const XLSX = require('xlsx');
 
 let mainWindow;
+let settingsWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     fullscreen: true,
+    autoHideMenuBar: true,
+    icon: path.join(__dirname, "public", "background", "icon.ico"),
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
+      nodeIntegration: false
+    }
+  });
+
+  mainWindow.loadFile(path.join(__dirname, 'templates', 'index.html'));
+
+  mainWindow.on('closed', function () {
+    mainWindow = null;
+  });
+}
+
+function openSettingsWindow() {
+  if (settingsWindow && !settingsWindow.isDestroyed()) {
+    settingsWindow.focus();
+    return;
+  }
+
+  settingsWindow = new BrowserWindow({
+    width: 900,
+    height: 700,
+    icon: path.join(__dirname, "public", "background", "icon.ico"),
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -18,14 +45,23 @@ function createWindow() {
     }
   });
 
-  mainWindow.loadFile(path.join(__dirname, 'templates', 'settings.html'));
+  settingsWindow.loadFile(path.join(__dirname, 'templates', 'settings.html'));
 
-  mainWindow.on('closed', function () {
-    mainWindow = null;
+  settingsWindow.on('closed', function () {
+    settingsWindow = null;
   });
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+  globalShortcut.register('F2', () => {
+    openSettingsWindow();
+  });
+});
+
+app.on('will-quit', () => {
+  globalShortcut.unregisterAll();
+});
 
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit();

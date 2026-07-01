@@ -48,9 +48,8 @@ h1{
   width: 100%;
   max-width: 900px;
   text-align: center;
-  padding: 40px; 
-  /* background: linear-gradient(to right, rgba(75, 173, 99, 0.4), rgba(34, 37, 34, 0.4), rgba(42, 45, 218, 0.5)); Gradient background with reduced opacity */
-  border-radius: 10px; 
+  padding: 40px;
+  background: linear-gradient(to right, rgba(75, 173, 99, 0.093), rgba(34, 37, 34, 0.093), rgba(42, 45, 218, 0.014));
   box-shadow: 0 0 20px rgb(207, 124, 124, 0.3); 
   font-size: 30px;
   color: #fdfdfd;
@@ -59,20 +58,20 @@ h1{
 .btn {
   margin: 10px;
   padding: 15px 30px;
-  font-size: 1.1em !important; 
+  font-size: 1.2em !important; 
   font-weight: bolder !important;
-  background-color:rgba(7, 200, 133)!important;
+  background-color:rgba(50, 106, 129)!important;
   color: rgb(248, 248, 248) !important;
   box-shadow: 0 20px 12px rgb(20, 20, 20, 0.404); 
   text-transform: uppercase;
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-  width: 200px;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; 
+  width: 250px;
   height: 100px;
 }
 
 
 .btn:hover{
-  background: linear-gradient(30deg,rgba(7, 200, 133), rgb(234,239,232,255), rgba(15, 40, 95)) !important;
+  background: linear-gradient(30deg,rgba(50, 106, 129), rgb(27,112,148)) !important;
   color: rgb(248, 248, 248);
 }
 
