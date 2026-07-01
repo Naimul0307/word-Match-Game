@@ -169,6 +169,7 @@ body {
   overflow-y: auto;
   z-index: 5;
 }
+
 #words-to-find h1 {
   font-size: 20px;
   font-weight: bolder;
@@ -192,12 +193,14 @@ body {
   border: 2px solid #ccc;
   border-radius: 20px;
   font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(50, 106, 129);
+  color: #fff;
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 #word-list li.found {
   color: #fff;
+  background-color: rgb(116, 192, 222);
   border-color: transparent;
   text-decoration: line-through;
 }

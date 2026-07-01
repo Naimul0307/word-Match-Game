@@ -34,6 +34,21 @@ document.addEventListener('DOMContentLoaded', function () {
         wordListEl.appendChild(li);
       });
     }
+    // function renderWordList() {
+    //   const wordListEl = document.getElementById("word-list");
+    //   wordListEl.innerHTML = "";
+    //   words.forEach((word) => {
+    //     const li = document.createElement("li");
+    //     li.textContent = getWordHint(word);
+    //     li.dataset.word = word;
+    //     wordListEl.appendChild(li);
+    //   });
+    // }
+
+    // function getWordHint(word) {
+    //   const visibleCount = Math.min(3, word.length - 1);
+    //   return word.slice(0, visibleCount) + "_".repeat(word.length - visibleCount);
+    // }
 
     function loadWords() {
       fetch('../public/xml/words.xml')
@@ -214,6 +229,11 @@ document.addEventListener('DOMContentLoaded', function () {
           lastMatchedTime = timeLeft;
 
           // Mark the word in the list as found
+          // const listItem = document.querySelector(`#word-list li[data-word="${wordToAdd}"]`);
+          // if (listItem) {
+          //   listItem.classList.add("found", colorClass);
+          //   listItem.textContent = wordToAdd; // reveal full word once found
+          // }
           const listItem = document.querySelector(`#word-list li[data-word="${wordToAdd}"]`);
           if (listItem) {
             listItem.classList.add("found", colorClass);
