@@ -16,6 +16,25 @@ document.addEventListener('DOMContentLoaded', function () {
     wordGrid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
     wordGrid.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 
+    // Color classes matched to game.css .matched-N classes
+    const matchColorCount = 10; // Must match number of matched-N classes defined in CSS
+
+    function getColorClassForWord(word) {
+      const index = words.indexOf(word);
+      return `matched-${index % matchColorCount}`;
+    }
+
+    function renderWordList() {
+      const wordListEl = document.getElementById("word-list");
+      wordListEl.innerHTML = "";
+      words.forEach((word) => {
+        const li = document.createElement("li");
+        li.textContent = word;
+        li.dataset.word = word;
+        wordListEl.appendChild(li);
+      });
+    }
+
     function loadWords() {
       fetch('../public/xml/words.xml')
         .then(response => response.text())
@@ -183,11 +202,22 @@ document.addEventListener('DOMContentLoaded', function () {
       const reversedWord = selectedWord.split("").reverse().join("");
 
       if (words.includes(selectedWord) || words.includes(reversedWord)) {
-        selectedCells.forEach((cell) => cell.classList.add("matched"));
         const wordToAdd = words.includes(selectedWord) ? selectedWord : reversedWord;
+        const colorClass = getColorClassForWord(wordToAdd);
+
+        selectedCells.forEach((cell) => {
+          cell.classList.add("matched", colorClass);
+        });
+
         if (!matchedWords.includes(wordToAdd)) {
           matchedWords.push(wordToAdd);
           lastMatchedTime = timeLeft;
+
+          // Mark the word in the list as found
+          const listItem = document.querySelector(`#word-list li[data-word="${wordToAdd}"]`);
+          if (listItem) {
+            listItem.classList.add("found", colorClass);
+          }
         }
         updateScore();
       }
@@ -219,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function () {
           } else if (timeLeft <= 30) {
             timerElement.style.borderColor = 'yellow';
           } else {
-            timerElement.style.borderColor = '#4CAF50';
+            timerElement.style.borderColor = '#12b417';
           }
         } else {
           clearInterval(timerInterval);
@@ -282,6 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function initGame() {
       createGrid();
+      renderWordList();
       placeWords();
       fillRandomLetters();
       document.getElementById("score").textContent = `Score: ${score}`;

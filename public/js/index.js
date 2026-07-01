@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const videoElement = document.getElementById('video-player');
         const videoSource = document.getElementById('video-source');
         const fallbackBg = document.getElementById('fallback-bg');
+        const enterBtn = document.getElementById('enter-btn');
 
         function updateVideoSource() {
             if (window.innerHeight > window.innerWidth) {
@@ -28,16 +29,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         videoElement.addEventListener('click', redirectToUser);
         fallbackBg.addEventListener('click', redirectToUser);
+        enterBtn.addEventListener('click', redirectToUser);
 
         // Handle video load errors (hide video to reveal fallback)
         videoElement.addEventListener('error', () => {
             console.warn('Video failed to load — showing fallback image.');
             videoElement.classList.add('hidden');
+            enterBtn.classList.remove('hidden');
         });
 
         videoSource.addEventListener('error', () => {
             console.warn('Video source not found — showing fallback image.');
             videoElement.classList.add('hidden');
+            enterBtn.classList.remove('hidden');
         });
     }
 });

@@ -72,7 +72,6 @@ function animateScore(start, end) {
 }
 
 // Display only the latest result in table and send to Excel
-// Display only top 10 valid scores (exclude score=0 or time=0)
 async function displayTopScores() {
     let results = await window.myAPI.getResults();
 
@@ -113,3 +112,15 @@ async function displayTopScores() {
     document.getElementById("top-scores-container").style.display = "block";
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.pathname.endsWith('results.html')) {
+        displayResults();
+    }
+
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    }
+});

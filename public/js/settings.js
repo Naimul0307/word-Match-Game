@@ -22,7 +22,45 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('timerDuration', timerDuration);
     localStorage.setItem('wordCount', wordCount);
 
-    // Redirect to home or game page
-    window.location.href = 'index.html';
+    // Show success message
+    showSaveSuccessMessage();
   });
 });
+
+function showSaveSuccessMessage() {
+  let messageEl = document.getElementById('save-success-message');
+
+  // Create the element once, reuse it on subsequent saves
+  if (!messageEl) {
+    messageEl = document.createElement('div');
+    messageEl.id = 'save-success-message';
+    messageEl.textContent = 'Settings saved successfully!';
+    messageEl.style.cssText = `
+      margin-top: 10px;
+      padding: 10px 15px;
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 4px;
+      font-size: 14px;
+      transition: opacity 0.4s ease;
+    `;
+    document.getElementById('settings-info-form').insertAdjacentElement('afterend', messageEl);
+  }
+
+  // Reset visibility/opacity in case it's still fading from a previous save
+  messageEl.style.display = 'block';
+  messageEl.style.opacity = '1';
+
+  // Clear any pending fade-out from a previous save
+  if (messageEl._fadeTimeout) clearTimeout(messageEl._fadeTimeout);
+  if (messageEl._hideTimeout) clearTimeout(messageEl._hideTimeout);
+
+  // Fade out after 2.5s, then hide
+  messageEl._fadeTimeout = setTimeout(() => {
+    messageEl.style.opacity = '0';
+    messageEl._hideTimeout = setTimeout(() => {
+      messageEl.style.display = 'none';
+    }, 400);
+  }, 2500);
+}

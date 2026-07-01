@@ -1,7 +1,7 @@
 @font-face {
-  font-family: "Noto Sans", sans-serif;
-  src: url('../fonts/NotoSans-VariableFont.ttf') format('truetype');
-  font-weight: normal;
+  font-family: "Montserrat", sans-serif;
+  src: url('../fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
   font-style: normal;
 }
 
@@ -12,7 +12,7 @@
 }
 
 html, body {
-  font-family: "Noto Sans", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 18px;
   font-weight: 400;
   width: 100%;
@@ -144,20 +144,62 @@ body {
 }
 
 .grid-cell.matched {
-  background-color: green;
-  color: white;
+  color: rgb(252, 252, 252);
 }
+
+.matched-0 { background-color: #4CAF50; }
+.matched-1 { background-color: #2196F3; }
+.matched-2 { background-color: #FF9800; }
+.matched-3 { background-color: #E91E63; }
+.matched-4 { background-color: #329cc3; }
+.matched-5 { background-color: #d226f0; }
+.matched-6 { background-color: #38e36e; }
+.matched-7 { background-color: #daff07; }
+.matched-8 { background-color: #795548; }
+.matched-9 { background-color: #607D8B; }
 
 /* Words to Find Section */
 #words-to-find {
-  margin-top: 30px;
-  font-size: 18px;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-height: 14vh;
+  overflow-y: auto;
+  z-index: 5;
+}
+#words-to-find h1 {
+  font-size: 20px;
+  font-weight: bolder;
+  color: #fff;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 #word-list {
   list-style-type: none;
   padding: 0;
   font-size: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+#word-list li {
+  padding: 6px 14px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.85);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#word-list li.found {
+  color: #fff;
+  border-color: transparent;
+  text-decoration: line-through;
 }
 
 /* ✅ Portrait Mode Responsive - Still No Scroll */
@@ -211,6 +253,8 @@ body {
   }
 
   #words-to-find {
-    font-size: 16px;
+    font-size: 14px;
+    bottom: 5px;
+    max-height: 10vh;
   }
 }
