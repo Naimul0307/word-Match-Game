@@ -5,36 +5,73 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game Settings</title>
   <link rel="icon" href="../public/background/icon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../public/css/global.css">
   <link rel="stylesheet" href="../public/css/setting.css">
-  <link rel="stylesheet" href="../public/css/bootstrap.min.css">
 </head>
 <body>
+  <div class="settings-page">
+    <header class="settings-header">
+      <div>
+        <p class="settings-kicker">GAME CONFIGURATION</p>
+        <h1>Settings</h1>
+        <p class="settings-subtitle">
+          Change the shared theme, font and background images used by the whole Electron app.
+        </p>
+      </div>
+      <div class="header-actions">
+        <button type="button" class="secondary-btn" id="reset-settings">Reset Defaults</button>
+        <button type="button" class="secondary-btn" id="export-results">Export Results to Separate Folder</button>
+        <button type="button" class="danger-btn" id="delete-results">Delete Exported Results</button>
+        <button type="button" class="primary-btn" id="save-settings">Save Settings</button>
+      </div>
+    </header>
 
-  <div class="container-fluid">
-    <div class="section">
-        <h1 class="text-center">Settings</h1>
-        <div id="settings-form">
-            <form id="settings-info-form">
-              
-              <div class="form-group">
-                <label for="grid-size">Grid Size (e.g., 17):</label>
-                <input type="number" id="grid-size" class="form-control" name="grid-size" value="17">
-              </div>
-        
-              <div class="form-group">
-                <label for="timer-duration">Timer Duration (seconds):</label>
-                <input type="number" id="timer-duration" class="form-control" name="timer-duration" value="60">
-              </div>
-
-              <div class="form-group">
-                <label for="word-count">Word Count:</label>
-                <input type="number" id="word-count" class="form-control" name="word-count" value="7">
-              </div>
-            
-              <button type="submit" class="btn">Save</button>
-            </form>
+    <main class="settings-grid">
+      <section class="settings-card full-width">
+        <div class="card-heading">
+          <div>
+            <h2>Theme Colors</h2>
+            <p>Edit every <code>--color-*</code> variable from global.css.</p>
+          </div>
+          <span class="badge" id="color-count">0 colors</span>
         </div>
-    </div>
+        <div id="color-controls" class="color-grid"></div>
+      </section>
+
+      <section class="settings-card">
+        <div class="card-heading">
+          <div>
+            <h2>Font</h2>
+            <p>Upload a font and select it. The selected file automatically updates the <code>@font-face</code> block and <code>--font-family</code> in global.css.</p>
+          </div>
+        </div>
+
+        <label class="field-label" for="font-family">Font Family Name</label>
+        <input id="font-family" class="text-input" type="text" placeholder="Example: DynaPuff">
+
+        <label class="field-label" for="font-file">Selected Font File</label>
+        <select id="font-file" class="select-input"></select>
+
+        <div class="upload-row">
+          <input id="font-upload" type="file" accept=".ttf,.otf,.woff,.woff2">
+          <button type="button" class="secondary-btn" id="upload-font">Upload & Use Font</button>
+        </div>
+
+        <div id="font-files" class="asset-list"></div>
+      </section>
+
+      <section class="settings-card">
+        <div class="card-heading">
+          <div>
+            <h2>Background Images</h2>
+            <p>Each page has landscape and portrait image slots. Uploading replaces the exact project filename.</p>
+          </div>
+        </div>
+        <div id="background-slots" class="asset-grid"></div>
+      </section>
+    </main>
+
+    <div id="settings-message" class="settings-message" role="status"></div>
   </div>
 
   <script src="../public/js/settings.js"></script>

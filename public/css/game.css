@@ -1,263 +1,372 @@
-@font-face {
-  font-family: "Montserrat", sans-serif;
-  src: url('../fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html, body {
-  font-family: "Montserrat", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; /* ✅ Disable all scrolling */
-  background-color: #f4f4f4;
-  text-align: center;
-  background-image: url('../background/game-background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #000;
-}
-
-/* ✅ Prevent any accidental scroll gestures on touch devices */
-body {
-  touch-action: none;
-  -ms-touch-action: none;
-}
-
-/* Timer Wrapper */
-#timer-wrapper {
-  position: absolute;
-  top: 5px;
-  left: 94px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 10;
-}
-
-#time-text {
-  font-size: 25px;
-  font-weight: bolder;
-  color: white;
-  margin-bottom: 5px;
-}
-
-#timer {
-  width: 100px;
-  height: 100px;
-  font-size: 20px;
-  font-weight: bolder;
-  color: #333;
-  background-color: rgba(255, 255, 255, 0.7);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  border: 10px solid #cacfca;
-  transition: border-color 6s linear;
-}
-
-@keyframes border-color-animation {
-  0% { border-color: #4CAF50; }
-  66% { border-color: yellow; }
-  100% { border-color: red; }
-}
-
-#time-left {
-  font-size: 28px;
-  font-weight: bolder;
-}
-
-#sec {
-  font-size: 14px;
-  font-weight: bolder;
-  margin-top: 5px;
-}
-
-.time-low {
-  animation: blink 0.5s infinite alternate;
-  color: red;
-}
-
-@keyframes blink {
-  from { opacity: 1; }
-  to { opacity: 0.5; }
-}
-
-/* Score Display */
-#score {
-  position: absolute;
-  top: 25px;
-  right: 100px;
-  font-size: 30px;
-  font-weight: bold;
-  color: white;
-}
-
-/* Game Container */
-#game-container {
-  width: 90%;
-  height: 60vh;
-  margin: 160px auto;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Word Grid */
-#word-grid {
-  display: grid;
-  width: 100%;
-  height: 100%;
-}
-
-.grid-cell {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid #ccc;
-  background-color: #fff;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.grid-cell.selected {
-  background-color: rgb(182, 182, 180);
-}
-
-.grid-cell.matched {
-  color: rgb(252, 252, 252);
-}
-
-.matched-0 { background-color: #4CAF50; }
-.matched-1 { background-color: #2196F3; }
-.matched-2 { background-color: #FF9800; }
-.matched-3 { background-color: #E91E63; }
-.matched-4 { background-color: #329cc3; }
-.matched-5 { background-color: #d226f0; }
-.matched-6 { background-color: #38e36e; }
-.matched-7 { background-color: #daff07; }
-.matched-8 { background-color: #795548; }
-.matched-9 { background-color: #607D8B; }
-
-/* Words to Find Section */
-#words-to-find {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-height: 14vh;
-  overflow-y: auto;
-  z-index: 5;
-}
-
-#words-to-find h1 {
-  font-size: 20px;
-  font-weight: bolder;
-  color: #fff;
-  margin-bottom: 10px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-#word-list {
-  list-style-type: none;
-  padding: 0;
-  font-size: 18px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-}
-
-#word-list li {
-  padding: 6px 14px;
-  border: 2px solid #ccc;
-  border-radius: 20px;
-  font-weight: bold;
-  background-color: rgba(50, 106, 129);
-  color: #fff;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
-#word-list li.found {
-  color: #fff;
-  background-color: rgb(116, 192, 222);
-  border-color: transparent;
-  text-decoration: line-through;
-}
-
-/* ✅ Portrait Mode Responsive - Still No Scroll */
-@media screen and (orientation: portrait) {
-  html, body {
-    overflow: hidden; /* ✅ Prevent vertical scroll even in portrait */
-    height: 100vh;
-    width: 100vw;
-  }
-
-  #game-container {
-    width: 90%;
-    height: 60vh;
-    margin: 25vh auto; /* Center vertically on screen */
-  }
-
-  .grid-cell {
-    font-size: 30px;
-    height: 65px;
-    width: 54px;
-  }
-
-  #score {
-    margin-top:175px;
-    top: 8%;
-    right: 10%;
-    font-size: 36px;
-  }
-
-  #timer-wrapper {
-    margin-top:75px;
-    top: 8%;
-    left: 8%;
-  }
-
-  #timer {
-    width: 150px;
-    height: 150px;
-  }
-
-  #time-left {
-    font-size: 40px;
-  }
-
-  #sec {
-    font-size: 25px;
-  }
-
-  #time-text {
-    font-size: 45px;
-  }
-
-  #words-to-find {
-    font-size: 14px;
-    bottom: 5px;
-    max-height: 10vh;
-  }
-}
+this is game.css code /* ========================================================= 
+   GAME 
+   ========================================================= */ 
+ 
+html, 
+body { 
+  text-align: center; 
+ 
+  background-image: var(--bg-game-landscape); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+} 
+ 
+ 
+/* ========================================================= 
+   TIMER 
+   ========================================================= */ 
+ 
+#timer-wrapper { 
+  position: absolute; 
+ 
+  top: 88px; 
+  left: 890px; 
+ 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+ 
+  z-index: 10; 
+} 
+ 
+#time-text { 
+  margin-bottom: 5px; 
+ 
+  font-size: 25px; 
+  font-weight: var(--font-weight-bolder); 
+ 
+  color: var(--color-white); 
+} 
+ 
+#timer { 
+  width: 100px; 
+  height: 100px; 
+ 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+ 
+  font-size: 20px; 
+  font-weight: var(--font-weight-bolder); 
+ 
+  color: var(--color-game-gray); 
+  background-color: var(--color-white-transparent-07); 
+ 
+  border: 10px solid var(--color-game-border); 
+  border-radius: var(--radius-round); 
+ 
+  box-shadow: var(--shadow-timer); 
+ 
+  transition: border-color 6s linear; 
+} 
+ 
+@keyframes border-color-animation { 
+  0% { 
+    border-color: var(--color-match-0); 
+  } 
+ 
+  66% { 
+    border-color: var(--color-timer-yellow); 
+  } 
+ 
+  100% { 
+    border-color: var(--color-time-low); 
+  } 
+} 
+ 
+#time-left { 
+  font-size: 28px; 
+  font-weight: var(--font-weight-bolder); 
+} 
+ 
+#sec { 
+  margin-top: 5px; 
+ 
+  font-size: 14px; 
+  font-weight: var(--font-weight-bolder); 
+} 
+ 
+.time-low { 
+  color: var(--color-time-low); 
+ 
+  animation: blink 0.5s infinite alternate; 
+} 
+ 
+@keyframes blink { 
+  from { 
+    opacity: 1; 
+  } 
+ 
+  to { 
+    opacity: 0.5; 
+  } 
+} 
+ 
+ 
+/* ========================================================= 
+   SCORE 
+   ========================================================= */ 
+ 
+#score { 
+  position: absolute; 
+ 
+  top: 154px; 
+  right: 688px; 
+ 
+  font-size: 30px; 
+  font-weight: var(--font-weight-bold); 
+ 
+  color: var(--color-white); 
+} 
+ 
+ 
+/* ========================================================= 
+   GAME CONTAINER 
+   ========================================================= */ 
+ 
+#game-container { 
+  width: 90%; 
+  height: 60vh; 
+ 
+  margin: 286px auto; 
+  padding: 30px; 
+ 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+ 
+  background-color: var(--color-white-transparent-09); 
+ 
+  border-radius: var(--radius-small); 
+ 
+  box-shadow: var(--shadow-light); 
+} 
+ 
+ 
+/* ========================================================= 
+   WORD GRID 
+   ========================================================= */ 
+ 
+#word-grid { 
+  width: 100%; 
+  height: 100%; 
+ 
+  display: grid; 
+} 
+ 
+.grid-cell { 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+ 
+  border: 2px solid var(--color-border); 
+ 
+  background-color: var(--color-white); 
+ 
+  font-size: 20px; 
+  font-weight: var(--font-weight-bold); 
+ 
+  cursor: pointer; 
+ 
+  transition: background-color var(--transition-fast); 
+} 
+ 
+.grid-cell.selected { 
+  background-color: var(--color-game-selected); 
+} 
+ 
+.grid-cell.matched { 
+  color: var(--color-white); 
+} 
+ 
+ 
+/* ---------- Matched Colors ---------- */ 
+ 
+.matched-0 { 
+  background-color: var(--color-match-0); 
+} 
+ 
+.matched-1 { 
+  background-color: var(--color-match-1); 
+} 
+ 
+.matched-2 { 
+  background-color: var(--color-match-2); 
+} 
+ 
+.matched-3 { 
+  background-color: var(--color-match-3); 
+} 
+ 
+.matched-4 { 
+  background-color: var(--color-match-4); 
+} 
+ 
+.matched-5 { 
+  background-color: var(--color-match-5); 
+} 
+ 
+.matched-6 { 
+  background-color: var(--color-match-6); 
+} 
+ 
+.matched-7 { 
+  background-color: var(--color-match-7); 
+} 
+ 
+.matched-8 { 
+  background-color: var(--color-match-8); 
+} 
+ 
+.matched-9 { 
+  background-color: var(--color-match-9); 
+} 
+ 
+ 
+/* ========================================================= 
+   WORDS TO FIND 
+   ========================================================= */ 
+ 
+#words-to-find { 
+  position: absolute; 
+ 
+  bottom: 15px; 
+  left: 50%; 
+ 
+  width: 90%; 
+  max-height: 14vh; 
+ 
+  transform: translateX(-50%); 
+ 
+  overflow-y: auto; 
+ 
+  z-index: 5; 
+} 
+ 
+#words-to-find h1 { 
+  margin-bottom: 10px; 
+ 
+  font-size: 20px; 
+  font-weight: var(--font-weight-bolder); 
+ 
+  color: var(--color-white); 
+ 
+  text-shadow: 0 2px 4px var(--color-black-transparent-04); 
+} 
+ 
+#word-list { 
+  padding: 0; 
+ 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+ 
+  gap: 12px; 
+ 
+  list-style-type: none; 
+ 
+  font-size: 18px; 
+} 
+ 
+#word-list li { 
+  padding: 6px 14px; 
+ 
+  border: 2px solid var(--color-border); 
+  border-radius: var(--radius-large); 
+ 
+  font-weight: var(--font-weight-bold); 
+ 
+  background-color: var(--color-primary); 
+  color: var(--color-white); 
+ 
+  transition: 
+    background-color var(--transition-normal), 
+    color var(--transition-normal), 
+    border-color var(--transition-normal); 
+} 
+ 
+#word-list li.found { 
+  color: var(--color-white); 
+ 
+  background-color: var(--color-word-found); 
+ 
+  border-color: var(--color-transparent); 
+ 
+  text-decoration: line-through; 
+} 
+ 
+ 
+/* ========================================================= 
+   PORTRAIT 
+   ========================================================= */ 
+ 
+@media screen and (orientation: portrait) { 
+ 
+  html, 
+  body { 
+    width: 100vw; 
+    height: 100vh; 
+ 
+    overflow: hidden; 
+ 
+    background-image: var(--bg-game-portrait); 
+  } 
+ 
+  #game-container { 
+    width: 90%; 
+    height: 60vh; 
+ 
+    margin: 25vh auto; 
+  } 
+ 
+  .grid-cell { 
+    width: 54px; 
+    height: 65px; 
+ 
+    font-size: 30px; 
+  } 
+ 
+  #score { 
+    top: 8%; 
+    right: 10%; 
+ 
+    margin-top: 175px; 
+ 
+    font-size: 36px; 
+  } 
+ 
+  #timer-wrapper { 
+    top: 8%; 
+    left: 8%; 
+ 
+    margin-top: 75px; 
+  } 
+ 
+  #timer { 
+    width: 150px; 
+    height: 150px; 
+  } 
+ 
+  #time-left { 
+    font-size: 40px; 
+  } 
+ 
+  #sec { 
+    font-size: 25px; 
+  } 
+ 
+  #time-text { 
+    font-size: 45px; 
+  } 
+ 
+  #words-to-find { 
+    bottom: 5px; 
+ 
+    max-height: 10vh; 
+ 
+    font-size: 14px; 
+  } 
+} 

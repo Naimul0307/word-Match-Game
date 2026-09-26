@@ -1,8 +1,100 @@
 @font-face {
-  font-family: "Montserrat", sans-serif;
-  src: url('../fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-family: "DynaPuff VariableFont wdth,wght";
+  src: url("../fonts/DynaPuff-VariableFont_wdth%2Cwght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
+  font-display: swap;
+}
+:root {
+  --bg-index-landscape: url("../background/start-screen.jpg");
+  --bg-index-portrait: url("../background/start-screen-p.jpg");
+  --bg-game-landscape: url("../background/game-background.jpg");
+  --bg-game-portrait: url("../background/game-background-p.jpg");
+  --bg-result-landscape: url("../background/leaderboard.jpg");
+  --bg-result-portrait: url("../background/leaderboard-p.jpg");
+  --bg-setting-landscape: url("../background/setting.jpg");
+  --bg-setting-portrait: url("../background/setting-p.jpg");
+  --bg-user-landscape: url("../background/user.jpg");
+  --bg-user-portrait: url("../background/user-p.jpg");
+
+  --font-family: "DynaPuff VariableFont wdth,wght", sans-serif;
+  --font-size-base: 18px;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --font-weight-bolder: 800;
+
+  --color-white: #eddede;
+  --color-black: #000000;
+  --color-text: #0a0a0a;
+  --color-light-text: #fdfdfd;
+  --color-background: #f4f4f4;
+  --color-primary: #272a2a;
+  --color-primary-hover: rgb(27, 112, 148);
+  --color-border: #cccccc;
+  --color-border-light: #dddddd;
+  --color-border-white: rgb(212, 212, 212);
+  --color-input-background: #ffffff;
+  --color-input-text: #000000;
+
+  --color-game-gray: #333333;
+  --color-game-border: #cacfca;
+  --color-game-selected: rgb(182, 182, 180);
+
+  --color-match-0: #4caf50;
+  --color-match-1: #2196f3;
+  --color-match-2: #ff9800;
+  --color-match-3: #e91e63;
+  --color-match-4: #329cc3;
+  --color-match-5: #d226f0;
+  --color-match-6: #38e36e;
+  --color-match-7: #daff07;
+  --color-match-8: #795548;
+  --color-match-9: #607d8b;
+
+  --color-time-low: red;
+  --color-time-up: rgb(243, 61, 61);
+  --color-congrats: rgb(92, 243, 92);
+  --color-word-found: rgb(116, 192, 222);
+  --color-table-hover: #f1f1f1;
+  --color-score: rgba(255, 255, 255, 0.878);
+  --color-result-heading: whitesmoke;
+
+  --gradient-section-1: rgba(75, 173, 99, 0.093);
+  --gradient-section-2: rgba(34, 37, 34, 0.093);
+  --gradient-section-3: rgba(42, 45, 218, 0.014);
+  --gradient-redirect-1: rgba(7, 200, 132, 0.014);
+  --gradient-redirect-2: rgb(234, 239, 232);
+  --gradient-redirect-3: rgba(15, 40, 95);
+
+  --color-transparent: transparent;
+  --color-black-transparent-008: rgba(0, 0, 0, 0.08);
+  --color-black-transparent-015: rgba(0, 0, 0, 0.15);
+  --color-black-transparent-02: rgba(0, 0, 0, 0.2);
+  --color-black-transparent-04: rgba(20, 20, 20, 0.404);
+  --color-black-transparent-06: rgba(20, 20, 20, 0.6);
+  --color-black-transparent-08: rgba(0, 0, 0, 0.8);
+  --color-white-transparent-011: rgba(255, 255, 255, 0.11);
+  --color-white-transparent-02: rgba(255, 255, 255, 0.2);
+  --color-white-transparent-07: rgba(255, 255, 255, 0.7);
+  --color-white-transparent-0878: rgba(255, 255, 255, 0.878);
+  --color-white-transparent-03: rgba(255, 255, 255, 0.3);
+
+  --shadow-button: 0 20px 12px rgba(20, 20, 20, 0.404);
+  --shadow-button-active: 0 6px 12px rgba(20, 20, 20, 0.6);
+  --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.2);
+  --shadow-timer: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-thumbnail: 0 0 10px rgba(255, 255, 255, 0.3);
+  --shadow-section: 0 0 20px rgba(207, 124, 124, 0.3);
+
+  --radius-small: 10px;
+  --radius-medium: 15px;
+  --radius-large: 20px;
+  --radius-round: 50%;
+
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-smooth: 0.3s ease-out;
 }
 
 * {
@@ -11,75 +103,136 @@
   box-sizing: border-box;
 }
 
-body, html {
-  font-weight: 400;
-  background-color: #f4f4f4;
-  font-family: "Montserrat", sans-serif;
+html,
+body,
+body *,
+button,
+input,
+select,
+textarea,
+label,
+.form-control,
+.btn {
+  font-family: var(--font-family) !important;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  overflow: hidden;
+}
+
+
+.btn {
+  width: 250px;
+  height: 100px;
+  margin: 10px;
+  padding: 15px 30px;
+  font-family: var(--font-family);
+  font-size: 1.2em !important;
+  font-weight: var(--font-weight-bolder) !important;
+  text-transform: uppercase;
+  background-color: var(--color-primary) !important;
+  color: var(--color-white) !important;
+  border: none;
+  border-radius: var(--radius-medium);
+  box-shadow: var(--shadow-button);
+  cursor: pointer;
+  transition:
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth),
+    background var(--transition-smooth);
+}
+
+.btn:hover {
+  background: linear-gradient(
+    30deg,
+    var(--color-primary),
+    var(--color-primary-hover)
+  ) !important;
+  color: var(--color-white);
+}
+
+.btn:active {
+  transform: translateY(8px);
+  box-shadow: var(--shadow-button-active);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"] {
+  padding: 10px;
+  margin: 20px;
+  font-family: var(--font-family);
+  font-size: 1.2em;
+  background-color: var(--color-input-background);
+  color: var(--color-input-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-button);
+  transition:
+    transform var(--transition-smooth),
+    box-shadow var(--transition-smooth);
+}
+
+.container-fluid {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  padding: 0 15px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  width: 100%;
+  max-width: 900px;
+  padding: 40px;
   text-align: center;
-  width: 100%;
-  height: 100%; 
-  overflow-x: hidden;
-  background-image: url('../background/game-background.jpg');
-  background-size: cover;
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Prevent background image from repeating */
-  color: #000000; /* Default text color for body */
+  background: linear-gradient(
+    to right,
+    var(--gradient-section-1),
+    var(--gradient-section-2),
+    var(--gradient-section-3)
+  );
+  box-shadow: var(--shadow-section);
+  font-size: 30px;
+  color: var(--color-light-text);
 }
 
-
-
-body, html {
-    width: 100%;
-    height: 100%;
-    background: #000;
-    overflow: hidden;
+h1 {
+  flex: 1;
+  font-size: 2em;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
 }
 
-
-/* Custom CSS */
-body, html {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    font-family: 'Helvetica Neue', sans-serif;
-    font-size: 18px; 
-    font-weight: 400;
-    background-image: url('../background/leaderboard.jpg'); 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat;
-    color: #141414;
-    overflow: hidden;
+.hidden {
+  display: none !important;
 }
 
-
-
-/* Custom CSS */
-body,html {
-  height: 100%;
-  width: 100%;
-  font-family: 'Helvetica Neue', sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  background-image: url('../background/background-p1.jpeg'); 
-  background-size: cover; 
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #000000;
+body {
+  touch-action: none;
+  -ms-touch-action: none;
 }
 
-/* Custom CSS */
-body,html {
-  height: 100%;
-  width: 100%;
-  font-family: 'Helvetica Neue', sans-serif;
-  font-size: 18px; 
-  font-weight: 400;
-  background-image: url('../background/game-background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #000000;
+body::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen
+  and (min-width: 1080px)
+  and (max-height: 1920px)
+  and (orientation: portrait) {
+  body {
+    background-image: var(--bg-setting-portrait);
+  }
 }

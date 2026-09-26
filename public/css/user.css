@@ -1,111 +1,44 @@
-@font-face {
-  font-family: "Montserrat", sans-serif;
-  src: url('../fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900;
-  font-style: normal;
-}
- 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* =========================================================
+   USER PAGE
+   ========================================================= */
 
-/* Custom CSS */
-body,html {
-  height: 100%;
-  width: 100%;
-  font-family: "Montserrat", sans-serif;
-  font-size: 18px; 
-  font-weight: 400;
-  background-image: url('../background/user.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: #fdfdfd;
-}
+/* ---------- Base ---------- */
 
-  
-h1{
-  flex: 1;
-  font-size: 2em;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-.container-fluid {
-  padding: 0 15px;
-  max-width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.section {
-  width: 100%;
-  max-width: 900px;
-  text-align: center;
-  padding: 40px;
-  background: linear-gradient(to right, rgba(75, 173, 99, 0.093), rgba(34, 37, 34, 0.093), rgba(42, 45, 218, 0.014));
-  box-shadow: 0 0 20px rgb(207, 124, 124, 0.3); 
-  font-size: 30px;
-  color: #fdfdfd;
-}
-
-.btn {
-  margin: 10px;
-  padding: 15px 30px;
-  font-size: 1.2em !important; 
-  font-weight: bolder !important;
-  background-color:rgba(50, 106, 129)!important;
-  color: rgb(248, 248, 248) !important;
-  box-shadow: 0 20px 12px rgb(20, 20, 20, 0.404); 
-  text-transform: uppercase;
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; 
-  width: 250px;
-  height: 100px;
+body {
+    background-image: var(--bg-user-landscape);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--color-light-text);
 }
 
 
-.btn:hover{
-  background: linear-gradient(30deg,rgba(50, 106, 129), rgb(27,112,148)) !important;
-  color: rgb(248, 248, 248);
-}
-
-.btn:active {
-  transform: translateY(8px); 
-  box-shadow: 0 6px 12px rgb(20, 20, 20, 0.6);
-}
+/* =========================================================
+   USER FORM
+   ========================================================= */
 
 #user-form {
-  margin-top: 20px;
-  text-align: center;
-  flex: 1;
-  font-size: 1.1em;
-  font-weight: bold;
-  text-transform: uppercase;
+    flex: 1;
+    margin-top: 20px;
+
+    text-align: center;
+
+    font-size: 1.1em;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
 }
 
 
-/* Adjust input text size */
-input[type=email],
-input[type=text] {
-  font-size: 1.2em;
-  padding: 10px;
-  margin: 20px;
-  border-radius: 20px; 
-  box-shadow: 0 20px 12px rgba(20, 20, 20, 0.404); 
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+/* =========================================================
+   PORTRAIT
+   ========================================================= */
+
+@media screen
+    and (min-width: 1080px)
+    and (max-height: 1920px)
+    and (orientation: portrait) {
+
+    body {
+        background-image: var(--bg-user-portrait);
+    }
 }
-
-/* Specific Media Query for 1080x1920 Resolution (Portrait) */
-@media screen and (min-width: 1080px) and (max-height: 1920px) and (orientation: portrait) {
-
-  body {
-      background-image: url('../background/user.jpg'); 
-  }
-  }
-  
