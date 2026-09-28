@@ -1,79 +1,464 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Settings</title>
-  <link rel="icon" href="../public/background/icon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="../public/css/global.css">
-  <link rel="stylesheet" href="../public/css/setting.css">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Settings</title>
+
+  <link
+    rel="icon"
+    href="../public/background/icon.ico"
+    type="image/x-icon"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../public/css/global.css"
+  >
+
+  <link
+    rel="stylesheet"
+    href="../public/css/setting.css"
+  >
 </head>
+
 <body>
+
+  <!-- =====================================================
+       SETTINGS PAGE
+       ===================================================== -->
+
   <div class="settings-page">
+
+    <!-- Page Header -->
     <header class="settings-header">
+
       <div>
-        <p class="settings-kicker">GAME CONFIGURATION</p>
         <h1>Settings</h1>
-        <p class="settings-subtitle">
-          Change the shared theme, font and background images used by the whole Electron app.
+
+        <p>
+          Customize the game appearance, gameplay and assets.
         </p>
       </div>
-      <div class="header-actions">
-        <button type="button" class="secondary-btn" id="reset-settings">Reset Defaults</button>
-        <button type="button" class="secondary-btn" id="export-results">Export Results to Separate Folder</button>
-        <button type="button" class="danger-btn" id="delete-results">Delete Exported Results</button>
-        <button type="button" class="primary-btn" id="save-settings">Save Settings</button>
+
+      <div class="settings-header-actions">
+
+        <button
+          type="button"
+          id="reset-settings"
+          class="secondary-btn"
+        >
+          Reset Settings
+        </button>
+
+        <button
+          type="button"
+          id="save-settings"
+          class="primary-btn"
+        >
+          Save Settings
+        </button>
+
       </div>
+
     </header>
 
+
+    <!-- ===================================================
+         MESSAGE
+         =================================================== -->
+
+    <div
+      id="settings-message"
+      class="settings-message"
+      aria-live="polite"
+    ></div>
+
+
+    <!-- ===================================================
+         SETTINGS GRID
+         =================================================== -->
+
     <main class="settings-grid">
-      <section class="settings-card full-width">
-        <div class="card-heading">
+
+
+      <!-- =================================================
+           GAME SETTINGS
+           ================================================= -->
+
+      <section class="settings-card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>Game Settings</h2>
+
+            <p>
+              Configure the game timer, grid size and number
+              of words.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="game-settings-grid">
+
+          <!-- Timer -->
+          <div class="setting-field">
+
+            <label for="timer-duration">
+              Timer Duration
+            </label>
+
+            <input
+              type="number"
+              id="timer-duration"
+              min="10"
+              max="600"
+              step="5"
+              placeholder="60"
+            >
+
+            <span class="field-help">
+              Seconds
+            </span>
+
+          </div>
+
+
+          <!-- Grid -->
+          <div class="setting-field">
+
+            <label for="grid-size">
+              Grid Size
+            </label>
+
+            <input
+              type="number"
+              id="grid-size"
+              min="5"
+              max="30"
+              step="1"
+              placeholder="17"
+            >
+
+            <span class="field-help">
+              5 × 5 to 30 × 30
+            </span>
+
+          </div>
+
+
+          <!-- Word Count -->
+          <div class="setting-field">
+
+            <label for="word-count">
+              Word Count
+            </label>
+
+            <input
+              type="number"
+              id="word-count"
+              min="1"
+              max="50"
+              step="1"
+              placeholder="7"
+            >
+
+            <span class="field-help">
+              Number of words
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           WORDS XML
+           ================================================= -->
+
+      <section class="settings-card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>Words XML</h2>
+
+            <p>
+              Manage the XML word list used by the game.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="xml-manager">
+
+          <div class="xml-file-info">
+
+            <span class="xml-label">
+              Current File
+            </span>
+
+            <code id="words-xml-current">
+              Checking...
+            </code>
+
+            <span
+              id="words-xml-status"
+              class="xml-status"
+            >
+              Checking...
+            </span>
+
+          </div>
+
+
+          <div class="xml-actions">
+
+            <input
+              type="file"
+              id="words-xml-upload"
+              accept=".xml,text/xml"
+            >
+
+            <button
+              type="button"
+              id="upload-words-xml"
+              class="secondary-btn"
+            >
+              Upload / Replace
+            </button>
+
+            <button
+              type="button"
+              id="export-words-xml"
+              class="secondary-btn"
+            >
+              Export
+            </button>
+
+            <button
+              type="button"
+              id="delete-words-xml"
+              class="danger-btn"
+            >
+              Delete
+            </button>
+
+          </div>
+
+
+          <p class="field-help">
+            Uploading always replaces
+            <strong>public/xml/words.xml</strong>.
+            Export creates a copy outside the project folder.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           FONT SETTINGS
+           ================================================= -->
+
+      <section class="settings-card">
+
+        <div class="card-header">
+
+          <div>
+            <h2>Font Settings</h2>
+
+            <p>
+              Choose the font used throughout the application.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="font-settings">
+
+          <div class="setting-field">
+
+            <label for="font-family">
+              Font Family
+            </label>
+
+            <input
+              type="text"
+              id="font-family"
+              placeholder="Font family"
+            >
+
+          </div>
+
+
+          <div class="setting-field">
+
+            <label for="font-file">
+              Font File
+            </label>
+
+            <select id="font-file">
+              <option value="">
+                No fonts uploaded
+              </option>
+            </select>
+
+          </div>
+
+
+          <div class="font-upload-row">
+
+            <input
+              type="file"
+              id="font-upload"
+              accept=".ttf,.otf,.woff,.woff2"
+            >
+
+            <button
+              type="button"
+              id="upload-font"
+              class="secondary-btn"
+            >
+              Upload Font
+            </button>
+
+          </div>
+
+
+          <div
+            id="font-files"
+            class="asset-list"
+          ></div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           COLORS
+           ================================================= -->
+
+      <section class="settings-card">
+
+        <div class="card-header">
+
           <div>
             <h2>Theme Colors</h2>
-            <p>Edit every <code>--color-*</code> variable from global.css.</p>
+
+            <p>
+              Customize the application's color variables.
+            </p>
           </div>
-          <span class="badge" id="color-count">0 colors</span>
+
+          <span
+            id="color-count"
+            class="item-count"
+          >
+            0 colors
+          </span>
+
         </div>
-        <div id="color-controls" class="color-grid"></div>
+
+
+        <div
+          id="color-controls"
+          class="color-controls"
+        ></div>
+
       </section>
 
-      <section class="settings-card">
-        <div class="card-heading">
+
+      <!-- =================================================
+           BACKGROUNDS
+           ================================================= -->
+
+      <section class="settings-card full-width">
+
+        <div class="card-header">
+
           <div>
-            <h2>Font</h2>
-            <p>Upload a font and select it. The selected file automatically updates the <code>@font-face</code> block and <code>--font-family</code> in global.css.</p>
+            <h2>Backgrounds</h2>
+
+            <p>
+              Upload and assign backgrounds to each page.
+            </p>
           </div>
+
         </div>
 
-        <label class="field-label" for="font-family">Font Family Name</label>
-        <input id="font-family" class="text-input" type="text" placeholder="Example: DynaPuff">
 
-        <label class="field-label" for="font-file">Selected Font File</label>
-        <select id="font-file" class="select-input"></select>
+        <div
+          id="background-slots"
+          class="background-slots"
+        ></div>
 
-        <div class="upload-row">
-          <input id="font-upload" type="file" accept=".ttf,.otf,.woff,.woff2">
-          <button type="button" class="secondary-btn" id="upload-font">Upload & Use Font</button>
-        </div>
-
-        <div id="font-files" class="asset-list"></div>
       </section>
 
-      <section class="settings-card">
-        <div class="card-heading">
+
+      <!-- =================================================
+           RESULTS
+           ================================================= -->
+
+      <section class="settings-card full-width">
+
+        <div class="card-header">
+
           <div>
-            <h2>Background Images</h2>
-            <p>Each page has landscape and portrait image slots. Uploading replaces the exact project filename.</p>
+            <h2>Results Files</h2>
+
+            <p>
+              Manage exported Excel result files.
+            </p>
           </div>
+
         </div>
-        <div id="background-slots" class="asset-grid"></div>
+
+
+        <div class="result-actions">
+
+          <button
+            type="button"
+            id="export-results"
+            class="secondary-btn"
+          >
+            Export Results
+          </button>
+
+          <button
+            type="button"
+            id="delete-results"
+            class="danger-btn"
+          >
+            Delete Exported Results
+          </button>
+
+        </div>
+
       </section>
+
     </main>
 
-    <div id="settings-message" class="settings-message" role="status"></div>
   </div>
 
+
   <script src="../public/js/settings.js"></script>
+
 </body>
+
 </html>

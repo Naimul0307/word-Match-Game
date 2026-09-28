@@ -1,10 +1,3 @@
-@font-face {
-  font-family: "DynaPuff VariableFont wdth,wght";
-  src: url("../fonts/DynaPuff-VariableFont_wdth%2Cwght.ttf") format("truetype");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
 :root {
   --bg-index-landscape: url("../background/start-screen.jpg");
   --bg-index-portrait: url("../background/start-screen-p.jpg");

@@ -1,372 +1,444 @@
-this is game.css code /* ========================================================= 
-   GAME 
-   ========================================================= */ 
- 
-html, 
-body { 
-  text-align: center; 
- 
-  background-image: var(--bg-game-landscape); 
-  background-size: cover; 
-  background-position: center; 
-  background-repeat: no-repeat; 
-} 
- 
- 
-/* ========================================================= 
-   TIMER 
-   ========================================================= */ 
- 
-#timer-wrapper { 
-  position: absolute; 
- 
-  top: 88px; 
-  left: 890px; 
- 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
- 
-  z-index: 10; 
-} 
- 
-#time-text { 
-  margin-bottom: 5px; 
- 
-  font-size: 25px; 
-  font-weight: var(--font-weight-bolder); 
- 
-  color: var(--color-white); 
-} 
- 
-#timer { 
-  width: 100px; 
-  height: 100px; 
- 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
- 
-  font-size: 20px; 
-  font-weight: var(--font-weight-bolder); 
- 
-  color: var(--color-game-gray); 
-  background-color: var(--color-white-transparent-07); 
- 
-  border: 10px solid var(--color-game-border); 
-  border-radius: var(--radius-round); 
- 
-  box-shadow: var(--shadow-timer); 
- 
-  transition: border-color 6s linear; 
-} 
- 
-@keyframes border-color-animation { 
-  0% { 
-    border-color: var(--color-match-0); 
-  } 
- 
-  66% { 
-    border-color: var(--color-timer-yellow); 
-  } 
- 
-  100% { 
-    border-color: var(--color-time-low); 
-  } 
-} 
- 
-#time-left { 
-  font-size: 28px; 
-  font-weight: var(--font-weight-bolder); 
-} 
- 
-#sec { 
-  margin-top: 5px; 
- 
-  font-size: 14px; 
-  font-weight: var(--font-weight-bolder); 
-} 
- 
-.time-low { 
-  color: var(--color-time-low); 
- 
-  animation: blink 0.5s infinite alternate; 
-} 
- 
-@keyframes blink { 
-  from { 
-    opacity: 1; 
-  } 
- 
-  to { 
-    opacity: 0.5; 
-  } 
-} 
- 
- 
-/* ========================================================= 
-   SCORE 
-   ========================================================= */ 
- 
-#score { 
-  position: absolute; 
- 
-  top: 154px; 
-  right: 688px; 
- 
-  font-size: 30px; 
-  font-weight: var(--font-weight-bold); 
- 
-  color: var(--color-white); 
-} 
- 
- 
-/* ========================================================= 
-   GAME CONTAINER 
-   ========================================================= */ 
- 
-#game-container { 
-  width: 90%; 
-  height: 60vh; 
- 
-  margin: 286px auto; 
-  padding: 30px; 
- 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
- 
-  background-color: var(--color-white-transparent-09); 
- 
-  border-radius: var(--radius-small); 
- 
-  box-shadow: var(--shadow-light); 
-} 
- 
- 
-/* ========================================================= 
-   WORD GRID 
-   ========================================================= */ 
- 
-#word-grid { 
-  width: 100%; 
-  height: 100%; 
- 
-  display: grid; 
-} 
- 
-.grid-cell { 
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
- 
-  border: 2px solid var(--color-border); 
- 
-  background-color: var(--color-white); 
- 
-  font-size: 20px; 
-  font-weight: var(--font-weight-bold); 
- 
-  cursor: pointer; 
- 
-  transition: background-color var(--transition-fast); 
-} 
- 
-.grid-cell.selected { 
-  background-color: var(--color-game-selected); 
-} 
- 
-.grid-cell.matched { 
-  color: var(--color-white); 
-} 
- 
- 
-/* ---------- Matched Colors ---------- */ 
- 
-.matched-0 { 
-  background-color: var(--color-match-0); 
-} 
- 
-.matched-1 { 
-  background-color: var(--color-match-1); 
-} 
- 
-.matched-2 { 
-  background-color: var(--color-match-2); 
-} 
- 
-.matched-3 { 
-  background-color: var(--color-match-3); 
-} 
- 
-.matched-4 { 
-  background-color: var(--color-match-4); 
-} 
- 
-.matched-5 { 
-  background-color: var(--color-match-5); 
-} 
- 
-.matched-6 { 
-  background-color: var(--color-match-6); 
-} 
- 
-.matched-7 { 
-  background-color: var(--color-match-7); 
-} 
- 
-.matched-8 { 
-  background-color: var(--color-match-8); 
-} 
- 
-.matched-9 { 
-  background-color: var(--color-match-9); 
-} 
- 
- 
-/* ========================================================= 
-   WORDS TO FIND 
-   ========================================================= */ 
- 
-#words-to-find { 
-  position: absolute; 
- 
-  bottom: 15px; 
-  left: 50%; 
- 
-  width: 90%; 
-  max-height: 14vh; 
- 
-  transform: translateX(-50%); 
- 
-  overflow-y: auto; 
- 
-  z-index: 5; 
-} 
- 
-#words-to-find h1 { 
-  margin-bottom: 10px; 
- 
-  font-size: 20px; 
-  font-weight: var(--font-weight-bolder); 
- 
-  color: var(--color-white); 
- 
-  text-shadow: 0 2px 4px var(--color-black-transparent-04); 
-} 
- 
-#word-list { 
-  padding: 0; 
- 
-  display: flex; 
-  flex-wrap: wrap; 
-  justify-content: center; 
- 
-  gap: 12px; 
- 
-  list-style-type: none; 
- 
-  font-size: 18px; 
-} 
- 
-#word-list li { 
-  padding: 6px 14px; 
- 
-  border: 2px solid var(--color-border); 
-  border-radius: var(--radius-large); 
- 
-  font-weight: var(--font-weight-bold); 
- 
-  background-color: var(--color-primary); 
-  color: var(--color-white); 
- 
-  transition: 
-    background-color var(--transition-normal), 
-    color var(--transition-normal), 
-    border-color var(--transition-normal); 
-} 
- 
-#word-list li.found { 
-  color: var(--color-white); 
- 
-  background-color: var(--color-word-found); 
- 
-  border-color: var(--color-transparent); 
- 
-  text-decoration: line-through; 
-} 
- 
- 
-/* ========================================================= 
-   PORTRAIT 
-   ========================================================= */ 
- 
-@media screen and (orientation: portrait) { 
- 
-  html, 
-  body { 
-    width: 100vw; 
-    height: 100vh; 
- 
-    overflow: hidden; 
- 
-    background-image: var(--bg-game-portrait); 
-  } 
- 
-  #game-container { 
-    width: 90%; 
-    height: 60vh; 
- 
-    margin: 25vh auto; 
-  } 
- 
-  .grid-cell { 
-    width: 54px; 
-    height: 65px; 
- 
-    font-size: 30px; 
-  } 
- 
-  #score { 
-    top: 8%; 
-    right: 10%; 
- 
-    margin-top: 175px; 
- 
-    font-size: 36px; 
-  } 
- 
-  #timer-wrapper { 
-    top: 8%; 
-    left: 8%; 
- 
-    margin-top: 75px; 
-  } 
- 
-  #timer { 
-    width: 150px; 
-    height: 150px; 
-  } 
- 
-  #time-left { 
-    font-size: 40px; 
-  } 
- 
-  #sec { 
-    font-size: 25px; 
-  } 
- 
-  #time-text { 
-    font-size: 45px; 
-  } 
- 
-  #words-to-find { 
-    bottom: 5px; 
- 
-    max-height: 10vh; 
- 
-    font-size: 14px; 
-  } 
-} 
+/* =========================================================
+   GAME
+   ========================================================= */
+
+html,
+body {
+  text-align: center;
+
+  background-image: var(--bg-game-landscape);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+/* =========================================================
+   TIMER
+   ========================================================= */
+
+#timer-wrapper {
+  position: absolute;
+
+  top: 88px;
+  left: 890px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  z-index: 10;
+}
+
+#time-text {
+  margin-bottom: 5px;
+
+  font-size: 25px;
+  font-weight: var(--font-weight-bolder);
+
+  color: var(--color-white);
+}
+
+#timer {
+  width: 100px;
+  height: 100px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 20px;
+  font-weight: var(--font-weight-bolder);
+
+  color: var(--color-game-gray);
+  background-color: var(--color-white-transparent-07);
+
+  border: 10px solid var(--color-game-border);
+  border-radius: var(--radius-round);
+
+  box-shadow: var(--shadow-timer);
+
+  transition: border-color 6s linear;
+}
+
+@keyframes border-color-animation {
+  0% {
+    border-color: var(--color-match-0);
+  }
+
+  66% {
+    border-color: var(--color-timer-yellow);
+  }
+
+  100% {
+    border-color: var(--color-time-low);
+  }
+}
+
+#time-left {
+  font-size: 28px;
+  font-weight: var(--font-weight-bolder);
+}
+
+#sec {
+  margin-top: 5px;
+
+  font-size: 14px;
+  font-weight: var(--font-weight-bolder);
+}
+
+.time-low {
+  color: var(--color-time-low);
+
+  animation: blink 0.5s infinite alternate;
+}
+
+@keyframes blink {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.5;
+  }
+}
+
+
+/* =========================================================
+   SCORE
+   ========================================================= */
+
+#score {
+  position: absolute;
+
+  top: 154px;
+  right: 688px;
+
+  font-size: 30px;
+  font-weight: var(--font-weight-bold);
+
+  color: var(--color-white);
+}
+
+
+/* =========================================================
+   GAME CONTAINER
+   ========================================================= */
+
+#game-container {
+  width: 90%;
+  height: 60vh;
+
+  margin: 286px auto;
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--color-white-transparent-09);
+
+  border-radius: var(--radius-small);
+
+  box-shadow: var(--shadow-light);
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   WORD GRID
+   ========================================================= */
+
+#word-grid {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+
+  /*
+   * game.js changes the number of rows and columns
+   * according to the Grid Size from Settings.
+   *
+   * minmax(0, 1fr) keeps every cell inside the
+   * existing game container.
+   */
+  grid-template-columns: repeat(17, minmax(0, 1fr));
+  grid-template-rows: repeat(17, minmax(0, 1fr));
+
+  gap: 2px;
+
+  min-width: 0;
+  min-height: 0;
+
+  box-sizing: border-box;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  touch-action: none;
+}
+
+
+/* =========================================================
+   GRID CELL
+   ========================================================= */
+
+.grid-cell {
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  border: 2px solid var(--color-border);
+
+  background-color: var(--color-white);
+
+  font-size: 20px;
+  font-weight: var(--font-weight-bold);
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  transition: background-color var(--transition-fast);
+}
+
+.grid-cell.selected {
+  background-color: var(--color-game-selected);
+}
+
+.grid-cell.matched {
+  color: var(--color-white);
+}
+
+
+/* =========================================================
+   MATCHED COLORS
+   ========================================================= */
+
+.matched-0 {
+  background-color: var(--color-match-0);
+}
+
+.matched-1 {
+  background-color: var(--color-match-1);
+}
+
+.matched-2 {
+  background-color: var(--color-match-2);
+}
+
+.matched-3 {
+  background-color: var(--color-match-3);
+}
+
+.matched-4 {
+  background-color: var(--color-match-4);
+}
+
+.matched-5 {
+  background-color: var(--color-match-5);
+}
+
+.matched-6 {
+  background-color: var(--color-match-6);
+}
+
+.matched-7 {
+  background-color: var(--color-match-7);
+}
+
+.matched-8 {
+  background-color: var(--color-match-8);
+}
+
+.matched-9 {
+  background-color: var(--color-match-9);
+}
+
+
+/* =========================================================
+   WORDS TO FIND
+   ========================================================= */
+
+#words-to-find {
+  position: absolute;
+
+  bottom: 15px;
+  left: 50%;
+
+  width: 90%;
+  max-height: 14vh;
+
+  transform: translateX(-50%);
+
+  overflow-y: auto;
+
+  z-index: 5;
+}
+
+#words-to-find h1 {
+  margin-bottom: 10px;
+
+  font-size: 20px;
+  font-weight: var(--font-weight-bolder);
+
+  color: var(--color-white);
+
+  text-shadow: 0 2px 4px var(--color-black-transparent-04);
+}
+
+#word-list {
+  padding: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 12px;
+
+  list-style-type: none;
+
+  font-size: 18px;
+}
+
+#word-list li {
+  padding: 6px 14px;
+
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-large);
+
+  font-weight: var(--font-weight-bold);
+
+  background-color: var(--color-primary);
+  color: var(--color-white);
+
+  transition:
+    background-color var(--transition-normal),
+    color var(--transition-normal),
+    border-color var(--transition-normal);
+}
+
+#word-list li.found {
+  color: var(--color-white);
+
+  background-color: var(--color-word-found);
+
+  border-color: var(--color-transparent);
+
+  text-decoration: line-through;
+}
+
+
+/* =========================================================
+   PORTRAIT
+   ========================================================= */
+
+@media screen and (orientation: portrait) {
+
+  html,
+  body {
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background-image: var(--bg-game-portrait);
+  }
+
+  #game-container {
+    width: 90%;
+    height: 60vh;
+
+    margin: 25vh auto;
+
+    box-sizing: border-box;
+  }
+
+  /*
+   * Grid cells must resize automatically.
+   *
+   * Do not use fixed width/height here.
+   * This allows 5x5, 10x10, 17x17, 25x25,
+   * and 30x30 grids to fit inside the same container.
+   */
+  .grid-cell {
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+    min-height: 0;
+
+    font-size: clamp(12px, 2.2vw, 30px);
+  }
+
+  #score {
+    top: 8%;
+    right: 10%;
+
+    margin-top: 175px;
+
+    font-size: 36px;
+  }
+
+  #timer-wrapper {
+    top: 8%;
+    left: 8%;
+
+    margin-top: 75px;
+  }
+
+  #timer {
+    width: 150px;
+    height: 150px;
+  }
+
+  #time-left {
+    font-size: 40px;
+  }
+
+  #sec {
+    font-size: 25px;
+  }
+
+  #time-text {
+    font-size: 45px;
+  }
+
+  #words-to-find {
+    bottom: 5px;
+
+    max-height: 10vh;
+
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================================
+   SMALL SCREENS
+   ========================================================= */
+
+@media screen and (max-width: 900px) {
+
+  #word-grid {
+    gap: 1px;
+  }
+
+  .grid-cell {
+    font-size: clamp(10px, 2vw, 20px);
+  }
+}

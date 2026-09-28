@@ -1,14 +1,13 @@
 {
-  "name": "electron-app",
+  "name": "Word Match Game",
   "version": "1.0.0",
+  "description": "Electron Application",
   "main": "main.js",
+  "author": "Andy Nguyen",
+  "license": "ISC",
   "scripts": {
-    "start": "npx electron .",
-    "package-win": "electron-packager . electron-app --platform=win32 --arch=x64 --out=dist --electron-version=33.2.0 --icon=icon.ico --overwrite"
-  },
-  "devDependencies": {
-    "electron": "^38.2.2",
-    "electron-packager": "^17.1.2"
+    "start": "electron .",
+    "build-win": "electron-builder --win"
   },
   "dependencies": {
     "debug": "^4.3.7",
@@ -16,8 +15,38 @@
     "supports-color": "^9.4.0",
     "xlsx": "^0.18.5"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "devDependencies": {
+    "electron": "^38.2.2",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.electron.app",
+    "productName": "Electron App",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist/**",
+      "!node_modules/.cache/**"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Electron App"
+    }
+  }
 }
